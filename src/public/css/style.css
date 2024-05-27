@@ -13,9 +13,18 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
-main {
+
+.main-content {
     flex: 1;
-    padding-bottom: 160px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    padding-bottom: 180px;
+}
+
+.cartImage {
+    width: 150px;
+    height: 100px;
 }
 
 .footerContainer {

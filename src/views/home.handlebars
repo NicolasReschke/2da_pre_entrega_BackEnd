@@ -1,3 +1,23 @@
-<a href=""></a>
-<a href=""></a>
-<a href=""></a>
+<body>
+    {{#if user}}
+        <h3>Bienvenido, 
+            <strong>
+                {{user.username}}
+            </strong>
+        </h3>
+        <h3>Carrito ID: 
+            <strong>
+                {{user.cart._id}}
+            </strong>
+        </h3>
+    {{else}}
+        <h3>
+            Inicia sesión para acceder a los productos 😏
+            <a href="/login" class="btn btn-info">Iniciar</a>
+        </h3>
+    {{/if}}
+
+    <a href=""></a>
+    <a href=""></a>
+    <a href=""></a>
+</body>

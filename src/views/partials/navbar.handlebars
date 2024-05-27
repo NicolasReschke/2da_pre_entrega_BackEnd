@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <!-- icono -->
         <a class="navbar-brand" href="/" target="_blank">
-            <img src="https://entrega-final-react-js-reschkenicolas.netlify.app/assets/LOGO1-71558ef6.jpg" width="50px" alt="">
+            <img src="https://www.shutterstock.com/image-vector/greek-spartan-helmet-hoplite-vector-600nw-1243325260.jpg" width="50px" alt="">
         </a>
         
         <!-- boton del menu -->
@@ -16,30 +16,29 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/">INICIO</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/products">PRODUCTOS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/carts">CARRITO</a>
-                </li>
-                {{!-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">CARRITO</a>
-                    <ul class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
-                        <li>
-                            <a class="dropdown-item" href="#" id="viewCart">Ver carrito actual</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#" id="createCart">Crear uno nuevo</a>
-                        </li>
-                    </ul>
-                </li> --}}
+                <!-- Agregar lógica para mostrar el enlace a productos solo si el usuario está autenticado -->
+                {{#if user}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/products">PRODUCTOS</a>
+                    </li>
+                {{/if}}
             </ul>
 
             <hr class="d-md-none text-white-50">
 
             <!-- mercadoshops -->
             <ul class="navbar-nav flex-wrap">
-                <button id="logoutButton">Cerrar sesión 👋</button>
+                <!-- Agregar lógica para mostrar el enlace al carrito solo si el usuario está autenticado -->
+                {{#if user}}
+                    <a class="nav-link" href="/carts/{{user.cart._id}}">CARRITO 🛒</a>
+                    <!-- Cambiar el texto del botón y el id a desconectarse -->
+                    <button id="logoutButton">Desconectarse 👋</button>
+                {{else}}
+                    <!-- Mostrar el enlace a iniciar sesión solo si el usuario no está autenticado -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">INICIAR SESIÓN</a>
+                    </li>
+                {{/if}}
             </ul>
         </div>
     </div>  

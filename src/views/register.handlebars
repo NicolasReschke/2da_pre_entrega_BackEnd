@@ -23,4 +23,15 @@
         </form>
         <p class="mt-3">¿Ya tienes una cuenta? <a href="/login">Inicia Sesión</a></p>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search)
+            if (urlParams.has('success')) {
+                Swal.fire('¡Éxito!', urlParams.get('success'), 'success')
+            }
+            if (urlParams.has('error')) {
+                Swal.fire('Error', urlParams.get('error'), 'error')
+            }
+        })
+    </script>
 </body>
