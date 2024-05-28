@@ -52,6 +52,9 @@ La información que se utilizó es de un [proyecto](https://entrega-final-react-
 - Se ha agregado una vista en `/login` para loguear el usuario.
 - Se ha agregado una vista en `/register` para registrar el usuario.
 
+![image](https://github.com/NicolasReschke/2da_pre_entrega_BackEnd/assets/124010002/15b98c88-a22b-4342-ab20-f44e1330b279)
+
+
 ## Dependencias
 | Dependencias | README |
 | ------ | ------ |
@@ -72,10 +75,19 @@ Se utilizó Postman para ver todo el flujo de información.
 En este enlace, pueden acceder a mi colección de Postman, para facilitarles el ruteo
 * [postman.json](https://github.com/NicolasReschke/2da_pre_entrega_BackEnd/blob/main/2da_pre_entrega_BackEnd.postman_collection.json)
 
+![image](https://github.com/NicolasReschke/2da_pre_entrega_BackEnd/assets/124010002/ff899b1b-aa7f-422e-a5bf-8477565fd48a)
 
 
 ## Handlebars
 Vistas creadas para los products, carts, viewDetailProduct, login y register.
+
+![image](https://github.com/NicolasReschke/2da_pre_entrega_BackEnd/assets/124010002/1ec1548a-fa97-431e-b4ef-b5c514b27aaf)
+
+![image](https://github.com/NicolasReschke/2da_pre_entrega_BackEnd/assets/124010002/3d4f6436-c110-40b8-b6bb-d1bb7ef963df)
+
+![image](https://github.com/NicolasReschke/2da_pre_entrega_BackEnd/assets/124010002/d360598a-2ffd-4dc6-ab0c-3ebd086c38be)
+
+![image](https://github.com/NicolasReschke/2da_pre_entrega_BackEnd/assets/124010002/5e60d87a-f2e7-43ac-b7d7-325b10e4ea07)
 
 
 
@@ -85,6 +97,9 @@ Vistas creadas para los products, carts, viewDetailProduct, login y register.
 - `GET /products`: Consulta de productos con filtros, paginación y ordenamientos.
 - `PUT /products/:id`: Actualización de un producto existente.
 
+![image](https://github.com/NicolasReschke/2da_pre_entrega_BackEnd/assets/124010002/45133c61-819b-4279-a1d6-f74696c740db)
+
+
 #### Carritos
 - `GET /carts`: Consulta de carrito.
 - `DELETE /api/carts/:cid/products/:pid`: Eliminación de un producto específico del carrito.
@@ -92,4 +107,5 @@ Vistas creadas para los products, carts, viewDetailProduct, login y register.
 - `PUT /api/carts/:cid/products/:pid`: Actualización de la cantidad de ejemplares de un producto en el carrito.
 - `DELETE /api/carts/:cid`: Eliminación de todos los productos del carrito.
 
+![image](https://github.com/NicolasReschke/2da_pre_entrega_BackEnd/assets/124010002/6958ed29-4e14-40d5-a4c4-a62cdd5c21f3)
 
