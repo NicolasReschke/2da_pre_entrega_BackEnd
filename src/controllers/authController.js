@@ -3,15 +3,17 @@ import Cart from '../models/cartModel.js'
 import passport from 'passport'
 
 export const registerUser = async (req, res) => {
-    const { username, email, password } = req.body
+    const { first_name, last_name, email, age, password, password2 } = req.body
     try {
         const existingUser = await User.findOne({ email })
+        if (password !== password2) {
+            return res.redirect('/register?error=Las contraseñas no coinciden.')
+        }
         if (existingUser) {
             return res.redirect('/register?error=El email ya está en uso.')
         }
 
-        const newUser = new User({ username, email, password })
-        await newUser.save()
+        const newUser = new User({ first_name, last_name, email, age, password })
 
         const newCart = new Cart()
         await newCart.save()
@@ -52,10 +54,11 @@ export const logoutUser = (req, res) => {
     })
 }
 
-export const isAuthenticated = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        return next()
-    } else {
-        res.redirect('/login?error=Necesitas iniciar sesión para acceder a esta página.')
-    }
+export const githubAuth = passport.authenticate('github', { scope: ['user:email'] })
+
+export const githubCallback = (req, res, next) => {
+    passport.authenticate('github', {
+        failureRedirect: '/login?error=Autenticación con GitHub fallida.',
+        successRedirect: '/products'
+    })(req, res, next)
 }

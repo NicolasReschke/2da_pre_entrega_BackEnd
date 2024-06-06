@@ -2,7 +2,7 @@
     {{#if user}}
         <h3 class="text-center">Bienvenido, 
             <strong>
-                {{user.username}}
+                {{user.first_name}}
             </strong>
         </h3>
     {{else}}
@@ -13,8 +13,13 @@
     {{/if}}
     <div class="container mt-5">
         <h1 class="text-center">Productos</h1>
-        <div class="row mb-4">
-            <div class="col-md-2">
+        <div class="row mb-4" style="gap: 50px; justify-content:center; align-items:center">
+            <div class="col-md-3">
+                <label for="category" class="form-label">Categoría</label>
+                <div id="category" class="form-switch">
+                </div>
+            </div>
+            <div class="text-center">
                 <label for="limit" class="form-label">Límite</label>
                 <select id="limit" class="form-select" onchange="fetchProducts()">
                     <option value="3">3</option>
@@ -22,28 +27,22 @@
                     <option value="10" selected>10</option>
                     <option value="20">20</option>
                 </select>
-            </div>
-            <div class="col-md-2">
-                <label for="sort" class="form-label">Ordenar por precio</label>
-                <select id="sort" class="form-select" onchange="fetchProducts()">
-                    <option value="">Ninguno</option>
-                    <option value="asc">De menor a mayor</option>
-                    <option value="desc">De mayor a menor</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label for="category" class="form-label">Categoría</label>
-                <div id="category" class="form-switch">
-                    <!-- Categorías se llenarán dinámicamente con switches -->
+                <br>
+                <br>
+                <div class="text-center">
+                    <label for="sort" class="form-label">Ordenar por precio</label>
+                    <br>
+                    <select id="sort" class="form-select" onchange="fetchProducts()">
+                        <option value="">Ninguno</option>
+                        <option value="asc">De menor a mayor</option>
+                        <option value="desc">De mayor a menor</option>
+                    </select>
                 </div>
             </div>
             <div class="col-md-3">
                 <label for="query" class="form-label">¿Qué estás buscando?</label>
                 <input type="text" id="query" class="form-control" oninput="fetchProducts()">
-            </div>
-        </div>
-        <div class="row mb-4">
-            <div class="col-md-12 text-center">
+                <br>
                 <a href="/products">
                     Limpiar filtros
                 </a>

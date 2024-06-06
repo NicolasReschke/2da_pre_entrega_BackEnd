@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { isAuthenticated } from '../controllers/authController.js'
+import { isAuthenticated } from '../middleware/isAuthenticated.js'
 import User from '../models/userModel.js'
 import Cart from '../models/cartModel.js'
 import Product from '../models/productModel.js'
@@ -97,6 +97,13 @@ router.get('/login', async (req, res) => {
 router.get('/register', async (req, res) => {
     res.render('register', {
         style: 'style.css'
+    })
+})
+
+router.get('/profile', async (req, res) => {
+    res.render('profile', {
+        style: 'style.css',
+        user: res.locals.user
     })
 })
 

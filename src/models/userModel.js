@@ -2,15 +2,18 @@ import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
 
 const userSchema = new mongoose.Schema({
-    username: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    cart: { type: mongoose.Schema.Types.ObjectId, ref: 'Cart' },
+    first_name: String,
+    last_name: String,
+    email: { type: String, unique: true },
+    age: Number,
+    password: String,
+    role: { type: String, default: 'user' },
+    cart: { type: mongoose.Schema.Types.ObjectId, ref: 'Cart' }
 })
 
 userSchema.pre('save', async function (next) {
     const user = this
-    if (user.isModified('password')) {
+    if (user.isModified('password') && user.password) {
         user.password = await bcrypt.hash(user.password, 10)
     }
     next()

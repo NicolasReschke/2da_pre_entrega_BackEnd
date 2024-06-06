@@ -1,22 +1,18 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid">
-        <!-- icono -->
         <a class="navbar-brand" href="/" target="_blank">
             <img src="https://www.shutterstock.com/image-vector/greek-spartan-helmet-hoplite-vector-600nw-1243325260.jpg" width="50px" alt="">
         </a>
         
-        <!-- boton del menu -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#botonmenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         
-        <!-- elementos del menu colapsable -->
         <div class="collapse navbar-collapse" id="botonmenu">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link active" href="/">INICIO</a>
                 </li>
-                <!-- Agregar lógica para mostrar el enlace a productos solo si el usuario está autenticado -->
                 {{#if user}}
                     <li class="nav-item">
                         <a class="nav-link" href="/products">PRODUCTOS</a>
@@ -26,15 +22,12 @@
 
             <hr class="d-md-none text-white-50">
 
-            <!-- mercadoshops -->
             <ul class="navbar-nav flex-wrap">
-                <!-- Agregar lógica para mostrar el enlace al carrito solo si el usuario está autenticado -->
                 {{#if user}}
                     <a class="nav-link" href="/carts/{{user.cart._id}}">CARRITO 🛒</a>
-                    <!-- Cambiar el texto del botón y el id a desconectarse -->
-                    <button id="logoutButton">Desconectarse 👋</button>
+                    <a class="nav-link" href="/profile">{{user.first_name}} 👀</a>
+                    <button class="btn btn-danger" id="logoutButton">Desconectarse 👋</button>
                 {{else}}
-                    <!-- Mostrar el enlace a iniciar sesión solo si el usuario no está autenticado -->
                     <li class="nav-item">
                         <a class="nav-link" href="/login">INICIAR SESIÓN</a>
                     </li>
