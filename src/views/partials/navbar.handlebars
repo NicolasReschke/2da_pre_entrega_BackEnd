@@ -25,7 +25,10 @@
             <ul class="navbar-nav flex-wrap">
                 {{#if user}}
                     <a class="nav-link" href="/carts/{{user.cart._id}}">CARRITO 🛒</a>
-                    <a class="nav-link" href="/profile">{{user.first_name}} 👀</a>
+                    <a class="nav-link" href="/profile">
+                        {{user.first_name}}
+                        <img src="{{user.profile_image}}" class="profile-image">
+                    </a>
                     <button class="btn btn-danger" id="logoutButton">Desconectarse 👋</button>
                 {{else}}
                     <li class="nav-item">

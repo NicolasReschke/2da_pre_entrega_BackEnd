@@ -55,10 +55,18 @@ export const logoutUser = (req, res) => {
 }
 
 export const githubAuth = passport.authenticate('github', { scope: ['user:email'] })
-
 export const githubCallback = (req, res, next) => {
     passport.authenticate('github', {
         failureRedirect: '/login?error=Autenticación con GitHub fallida.',
         successRedirect: '/products'
     })(req, res, next)
 }
+
+export const googleAuth = passport.authenticate('google', { scope: ['email'] })
+export const googleCallback = (req, res, next) => {
+    passport.authenticate('google', {
+        failureRedirect: '/login?error=Autenticación con Google fallida.',
+        successRedirect: '/products'
+    })(req, res, next)
+}
+
