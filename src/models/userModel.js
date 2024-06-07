@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     password: String,
     role: { type: String, default: 'user' },
     cart: { type: mongoose.Schema.Types.ObjectId, ref: 'Cart' },
-    profile_image: { type: String, default: 'https://st2.depositphotos.com/1915171/5331/v/450/depositphotos_53310845-stock-illustration-question-mark-sign-icon-help.jpg' }
+    profile_image: { type: String, default: '/uploads/default.jpg' }
 })
 
 userSchema.pre('save', async function (next) {

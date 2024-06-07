@@ -1,6 +1,6 @@
 <h2>Perfil de Usuario</h2>
 
-<div class="card" style="width: 28rem;">
+<div class="card" style="width: 18rem;">
     <img src="{{user.profile_image}}" class="card-img-top">
     <div class="card-body">
         <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
@@ -12,9 +12,50 @@
         <li class="list-group-item">{{user.role}}</li>
     </ul>
     <div class="card-body">
-        <a href="/profile/:uid"><button class="btn btn-success">Editar mi perfil</button></a>
+        <a href="/profile/{{user._id}}"><button class="btn btn-success">Editar mi perfil</button></a>
         <br>
         <br>
-        <a href="/profile/:uid"><button class="btn btn-danger">Eliminar mi perfil</button></a>
+        <button id="deleteProfileBtn" class="btn btn-danger mt-3">Eliminar cuenta</button>
     </div>
 </div>
+
+<script>
+    document.getElementById('deleteProfileBtn').addEventListener('click', function() {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Esta acción es irreversible.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`/profile/{{user._id}}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        Swal.fire(
+                            'Eliminado!',
+                            'Tu perfil ha sido eliminado.',
+                            'success'
+                        ).then(() => {
+                            window.location.href = '/login?success=Perfil eliminado correctamente.'
+                        })
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            'Hubo un problema al eliminar tu perfil.',
+                            'error'
+                        )
+                    }
+                })
+            }
+        })
+    })
+</script>

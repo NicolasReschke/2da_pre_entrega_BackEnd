@@ -7,6 +7,7 @@ import { createServer } from 'http'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import passport from 'passport'
+import methodOverride from 'method-override'
 
 import productsRouter from './routes/productsRouter.js'
 import cartsRouter from './routes/cartsRouter.js'
@@ -31,6 +32,8 @@ app.use(session({
 
 app.use(passport.initialize())
 app.use(passport.session())
+
+app.use(methodOverride('_method'))
 
 app.use((req, res, next) => {
     if (req.isAuthenticated()) {

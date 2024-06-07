@@ -107,4 +107,11 @@ router.get('/profile', async (req, res) => {
     })
 })
 
+router.get('/profile/:uid', async (req, res) => {
+    res.render('uploadProfile', {
+        style: 'style.css',
+        user: res.locals.user
+    })
+})
+
 export default router
