@@ -24,12 +24,12 @@
 
             <ul class="navbar-nav flex-wrap">
                 {{#if user}}
-                    <a class="nav-link" href="/carts/{{user.cart._id}}">CARRITO 🛒</a>
                     <a class="nav-link" href="/profile">
                         {{user.first_name}}
                         <img src="{{user.profile_image}}" class="profile-image">
                     </a>
-                    <button class="btn btn-danger" id="logoutButton">Desconectarse 👋</button>
+                    <a class="nav-link" href="/carts/{{user.cart._id}}"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #dba020;"></i></a>
+                    <button class="btn" id="logoutButton"><i class="fa-solid fa-right-from-bracket fa-lg" style="color: #dba020;"></i></button>
                 {{else}}
                     <li class="nav-item">
                         <a class="nav-link" href="/login">INICIAR SESIÓN</a>

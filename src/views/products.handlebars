@@ -11,9 +11,9 @@
             <a href="/login" class="btn btn-info">Iniciar</a>
         </p>
     {{/if}}
-    <div class="container mt-5">
+    <div class="container mt-5" style="width: 1000px;">
         <h1 class="text-center">Productos</h1>
-        <div class="row mb-4" style="gap: 50px; justify-content:center; align-items:center">
+        <div class="row mb-4" style="gap: 100px; justify-content:center; align-items:center">
             <div class="col-md-3">
                 <label for="category" class="form-label">Categoría</label>
                 <div id="category" class="form-switch">
@@ -39,7 +39,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 text-center">
                 <label for="query" class="form-label">¿Qué estás buscando?</label>
                 <input type="text" id="query" class="form-control" oninput="fetchProducts()">
                 <br>
