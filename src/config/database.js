@@ -3,7 +3,12 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-mongoose.connect(process.env.MONGODB_URI)
+const mongoURI = process.env.MONGODB_URI
+
+mongoose.connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
 
 const db = mongoose.connection
 

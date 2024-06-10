@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import handlebars from 'express-handlebars'
 import mongoose from './config/database.js'
+import MongoStore from 'connect-mongo'
 import session from 'express-session'
 import { createServer } from 'http'
 import path from 'path'
@@ -24,10 +25,17 @@ const app = express()
 const server = createServer(app)
 
 app.use(session({
-    secret: 'SESSION_SECRET',
+    secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGODB_URI,
+        ttl: 7 * 24 * 60 * 60
+    }),
+    cookie: { 
+        secure: false, //Cambiar a true si en producción usamos https!!!
+        maxAge: 7 * 24 * 60 * 60 * 1000
+    }
 }))
 
 app.use(passport.initialize())
