@@ -74,14 +74,14 @@ router.get('/products/:pid', isAuthenticated, async (req, res) => {
 
 router.get('/products/category/:category', isAuthenticated, async (req, res) => {
     try {
-        const userId = req.user._id;
-        const user = await User.findById(userId).populate('cart').lean();
+        const userId = req.user._id
+        const user = await User.findById(userId).populate('cart').lean()
         
-        const cartId = user.cart._id;
+        const cartId = user.cart._id
 
-        const category = req.params.category;
+        const category = req.params.category
 
-        const products = await Product.find({ category }).lean();
+        const products = await Product.find({ category }).lean()
 
         res.render('productsByCategory', {
             category,
@@ -89,10 +89,10 @@ router.get('/products/category/:category', isAuthenticated, async (req, res) => 
             cartId,
             user: res.locals.user,
             style: 'style.css',
-        });
+        })
     } catch (error) {
-        console.error('Error al obtener productos por categoría:', error);
-        res.status(500).send('Error al obtener productos por categoría');
+        console.error('Error al obtener productos por categoría:', error)
+        res.status(500).send('Error al obtener productos por categoría')
     }
 })
 

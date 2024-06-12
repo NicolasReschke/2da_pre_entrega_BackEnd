@@ -36,9 +36,9 @@
     document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.add-cart').forEach(button => {
             button.addEventListener('click', async (event) => {
-                const productId = event.target.getAttribute('data-product-id');
-                const cartId = '{{cartId}}';
-                const productStock = event.target.getAttribute('data-product-stock');
+                const productId = event.target.getAttribute('data-product-id')
+                const cartId = '{{cartId}}'
+                const productStock = event.target.getAttribute('data-product-stock')
 
                 try {
                     const { value: cantidad } = await Swal.fire({
@@ -57,12 +57,12 @@
                         allowOutsideClick: false,
                         inputValidator: (value) => {
                             if (!value) {
-                                return 'Debes ingresar una cantidad';
+                                return 'Debes ingresar una cantidad'
                             } else if (value > productStock) {
-                                return `Solo puedes agregar hasta ${productStock} unidades`;
+                                return `Solo puedes agregar hasta ${productStock} unidades`
                             }
                         }
-                    });
+                    })
 
                     if (cantidad) {
                         const response = await fetch(`/api/carts/${cartId}/products/${productId}`, {
@@ -71,19 +71,19 @@
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify({ productId, cantidad })
-                        });
-                        const data = await response.json();
+                        })
+                        const data = await response.json()
 
                         if (data.status === 'success') {
-                            Swal.fire('¡Éxito!', 'Producto agregado al carrito.', 'success');
+                            Swal.fire('¡Éxito!', 'Producto agregado al carrito.', 'success')
                         } else {
-                            Swal.fire('Error', 'No se pudo agregar el producto al carrito.', 'error');
+                            Swal.fire('Error', 'No se pudo agregar el producto al carrito.', 'error')
                         }
                     }
                 } catch (error) {
-                    Swal.fire('Error', 'Ocurrió un error al agregar el producto al carrito.', 'error');
+                    Swal.fire('Error', 'Ocurrió un error al agregar el producto al carrito.', 'error')
                 }
-            });
-        });
-    });
+            })
+        })
+    })
 </script>
