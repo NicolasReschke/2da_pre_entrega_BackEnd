@@ -2,7 +2,7 @@
 import { Router } from 'express'
 import {
     getProducts,
-    getCategories
+    getCategories,
 } from '../controllers/productsController.js'
 
 const router = Router()

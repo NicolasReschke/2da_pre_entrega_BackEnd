@@ -106,12 +106,13 @@
                                 <div class="card-body">
                                     <h5 class="card-title">${product.name}</h5>
                                     <p class="card-text">${product.description}</p>
-                                    <p class="card-text"><strong>Precio:</strong> ${product.price}</p>
-                                    <p class="card-text"><strong>Categoría:</strong> ${product.category}</p>
+                                    <p class="card-text"><strong>Precio:</strong> $${product.price}</p>
                                     <p class="card-text"><strong>Stock:</strong> ${product.stock}</p>
-                                    <p class="card-text"><strong>Disponibilidad:</strong> ${product.availability ? 'Disponible' : 'No disponible'}</p>
                                     <button class="add-cart btn btn-success" data-product-id="${product._id}" data-product-stock="${product.stock}">Agregar al carrito</button>
-                                    <a href="/products/${product._id}" class="btn btn-info">Ver Detalle</a>
+                                    <a href="/products/${product._id}" class="btn btn-outline-info">Ver Detalle</a>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Updated ${product.updatedAt}</small>
                                 </div>
                             </div>
                         </div>

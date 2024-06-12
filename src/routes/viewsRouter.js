@@ -41,8 +41,8 @@ router.get('/products', isAuthenticated, async (req, res) => {
 
         res.render('products', {
             cartId: cartId,
+            user: res.locals.user,
             style: 'style.css',
-            user: res.locals.user
         })
     } catch (error) {
         console.error('Error al obtener el carrito:', error)
@@ -69,6 +69,30 @@ router.get('/products/:pid', isAuthenticated, async (req, res) => {
     } catch (error) {
         console.error('Error al obtener el producto:', error)
         res.status(500).render('viewDetailProduct', { error: error.message })
+    }
+})
+
+router.get('/products/category/:category', isAuthenticated, async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const user = await User.findById(userId).populate('cart').lean();
+        
+        const cartId = user.cart._id;
+
+        const category = req.params.category;
+
+        const products = await Product.find({ category }).lean();
+
+        res.render('productsByCategory', {
+            category,
+            products,
+            cartId,
+            user: res.locals.user,
+            style: 'style.css',
+        });
+    } catch (error) {
+        console.error('Error al obtener productos por categoría:', error);
+        res.status(500).send('Error al obtener productos por categoría');
     }
 })
 

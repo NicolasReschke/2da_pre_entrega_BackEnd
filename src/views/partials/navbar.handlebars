@@ -11,11 +11,25 @@
         <div class="collapse navbar-collapse" id="botonmenu">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/">INICIO</a>
+                    <a class="nav-link active" href="/">Inicio</a>
                 </li>
                 {{#if user}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/products">PRODUCTOS</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/products">Productos</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categorias
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" href="/products/category/Accessories">Accessories</a></li>
+                            <li><a class="dropdown-item" href="/products/category/Books">Books</a></li>
+                            <li><a class="dropdown-item" href="/products/category/Clothing">Clothing</a></li>
+                            <li><a class="dropdown-item" href="/products/category/Electronics">Electronics</a></li>
+                            <li><a class="dropdown-item" href="/products/category/Furniture">Furniture</a></li>
+                            <li><a class="dropdown-item" href="/products/category/Home Appliances">Home Appliances</a></li>
+                            <li><a class="dropdown-item" href="/products/category/Stationery">Stationery</a></li>
+                        </ul>
                     </li>
                 {{/if}}
             </ul>
@@ -24,10 +38,26 @@
 
             <ul class="navbar-nav flex-wrap">
                 {{#if user}}
-                    <a class="nav-link" href="/profile">
-                        {{user.first_name}}
-                        <img src="{{user.profile_image}}" class="profile-image">
-                    </a>
+                    <li class="nav-item dropdown btn-outline-secondary">
+                        <a class="nav-link active dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{user.first_name}}
+                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
+                                <span class="visually-hidden"></span>
+                            </span>
+                            <img src="{{user.profile_image}}" class="profile-image">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" href="/profile">Ver Perfil</a>
+                                
+                            </li>
+                            <li><a class="dropdown-item" href="/profile/{{user._id}}">Editar Perfil</a></li>
+                            <li><a class="dropdown-item" href="/carts/{{user.cart._id}}">Carrito</a></li>
+                            <li><a class="dropdown-item" href="#"><del>Vender</del></a></li>
+                            <li><a class="dropdown-item" href="#"><del>Favoritos</del></a></li>
+                            <li><a class="dropdown-item" href="#"><del>Notificaciones</del></a></li>
+                            <li><a class="dropdown-item" href="#"><del>Envianos un mensaje!</del></a></li>
+                        </ul>
+                    </li>
                     <a class="nav-link" href="/carts/{{user.cart._id}}"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #dba020;"></i></a>
                     <button class="btn" id="logoutButton"><i class="fa-solid fa-right-from-bracket fa-lg" style="color: #dba020;"></i></button>
                 {{else}}

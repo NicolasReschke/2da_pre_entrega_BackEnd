@@ -29,8 +29,8 @@ passport.use(new GitHubStrategy({
     callbackURL: "http://localhost:8080/auth/github/callback"
 }, async (accessToken, refreshToken, profile, done) => {
     try {
-        //CORRECCIÓN: Obtener el correo electrónico  usar profile.id (si email no está disponible)
-        const email = profile.emails[0].value || `${profile.username}@example.com`
+        //CORRECCIÓN: Obtener el correo electrónico || usar profile.id (si email no está disponible)
+        const email = profile.emails[0].value || `${profile.username}@github.com`
         const profilePhoto = Array.isArray(profile.photos) ? profile.photos[0].value : '../public/uploads/default.jpg'
 
         let user = await User.findOne({ email })
