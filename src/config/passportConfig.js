@@ -29,16 +29,20 @@ passport.use(new GitHubStrategy({
     callbackURL: "http://localhost:8080/auth/github/callback"
 }, async (accessToken, refreshToken, profile, done) => {
     try {
-        let user = await User.findOne({ email: profile.emails[0].value })
+        //CORRECCIÓN: Obtener el correo electrónico  usar profile.id (si email no está disponible)
+        const email = profile.emails[0].value || `${profile.username}@example.com`
+        const profilePhoto = Array.isArray(profile.photos) ? profile.photos[0].value : '../public/uploads/default.jpg'
+
+        let user = await User.findOne({ email })
         if (!user) {
             user = new User({
                 first_name: profile.displayName || profile.username,
                 last_name: '',
-                email: profile.emails[0].value,
+                email: email,
                 age: null,
                 password: '',
-                profile_image: profile.photos[0].value
-                })
+                profile_image: profilePhoto
+            })
             console.log(user)
 
             const newCart = new Cart()
