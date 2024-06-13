@@ -1,6 +1,20 @@
 import express from 'express'
-import { registerUser, loginUser, logoutUser, githubAuth, githubCallback, googleAuth, googleCallback, updateProfile, deleteUser } from '../controllers/authController.js'
 import upload from '../middleware/uploadMiddleware.js'
+
+import {
+    registerUser,
+    loginUser,
+    githubAuth,
+    githubCallback,
+    googleAuth,
+    googleCallback,
+    } from '../controllers/authController.js'
+
+import {
+    logoutUser,
+    updateProfile,
+    deleteUser,
+} from '../controllers/userController.js'
 
 const router = express.Router()
 

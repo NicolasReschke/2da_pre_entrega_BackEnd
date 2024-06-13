@@ -125,7 +125,9 @@ router.get('/register', async (req, res) => {
 })
 
 router.get('/profile', async (req, res) => {
+    const connectSid = req.cookies['connect.sid']
     res.render('profile', {
+        connectSid,
         style: 'style.css',
         user: res.locals.user
     })

@@ -9,11 +9,13 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import passport from 'passport'
 import methodOverride from 'method-override'
+import cookieParser from 'cookie-parser'
 
 import productsRouter from './routes/productsRouter.js'
 import cartsRouter from './routes/cartsRouter.js'
 import authRouter from './routes/authRouter.js'
 import viewsRouter from './routes/viewsRouter.js'
+import sessionsRouter from './routes/sessionsRouter.js'
 import './config/passportConfig.js'
 
 dotenv.config()
@@ -41,6 +43,8 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
+app.use(cookieParser())
+
 app.use(methodOverride('_method'))
 
 app.use((req, res, next) => {
@@ -59,10 +63,11 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.use('/', authRouter)
+app.use('/', viewsRouter)
 app.use('/api/products', productsRouter)
 app.use('/api/carts', cartsRouter)
-app.use('/', viewsRouter)
-app.use('/', authRouter)
+app.use('/api/sessions', sessionsRouter)
 
 const PORT = process.env.PORT
 server.listen(PORT, () => {

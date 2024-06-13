@@ -1,13 +1,13 @@
 <h2>Perfil de Usuario</h2>
 
-<div class="card mb-3" style="max-width: 740px;">
+<div class="card mb-3">
     <div class="row g-0" style="align-items: center; margin:10px;">
         <div class="col-md-4">
-        <img src="{{user.profile_image}}" class="img-fluid rounded-start">
+            <img src="{{user.profile_image}}" class="img-fluid rounded-start" style="width: 540px;">
         </div>
         <div class="col-md-8">
             <div class="card-body">
-                <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
+                <h5 class="card-title"><strong>Nombre: </strong>{{user.first_name}} {{user.last_name}}</h5>
                 <p class="card-text"><strong>Cart ID: </strong>{{user.cart._id}}</p>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><strong>Email: </strong>{{user.email}}</li>
@@ -18,6 +18,33 @@
             <div class="card-body">
                 <a href="/profile/{{user._id}}"><button class="btn btn-success">Editar mi perfil</button></a>
                 <button id="deleteProfileBtn" class="btn btn-danger">Eliminar cuenta</button>
+                <br>
+                <br>
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed btn btn-outline-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                /api/sessions/current
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body" id="currentUserDetails">
+                                <strong>key</strong><p>Cookie</p>
+                                <strong>Value</strong><p>connect.sid={{connectSid}}</p>
+                                <ul class="list-group list-group-flush">
+                                    <hr>
+                                    <strong>Datos del usuario actual:</strong>
+                                    <li class="list-group-item"><strong>ID: </strong>{{user._id}}</li>
+                                    <li class="list-group-item"><strong>Cart ID: </strong>{{user.cart._id}}</li>
+                                    <li class="list-group-item"><strong>Email: </strong>{{user.email}}</li>
+                                    <li class="list-group-item"><strong>Nombre: </strong>{{user.first_name}} {{user.last_name}}</li>
+                                    <li class="list-group-item"><strong>Edad: </strong>{{user.age}}</li>
+                                    <li class="list-group-item"><strong>Role: </strong>{{user.role}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
