@@ -124,8 +124,23 @@ router.get('/register', async (req, res) => {
     })
 })
 
-router.get('/profile', async (req, res) => {
+router.get('/profile', isAuthenticated, async (req, res) => {
     const connectSid = req.cookies['connect.sid']
+
+    const user = res.locals.user
+    const options = { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric', 
+        hour: 'numeric', 
+        minute: 'numeric', 
+        second: 'numeric' 
+    }
+
+    user.formattedCreatedAt = new Intl.DateTimeFormat('es-AR', options).format(new Date(user.createdAt))
+    user.formattedUpdatedAt = new Intl.DateTimeFormat('es-AR', options).format(new Date(user.updatedAt))
+
     res.render('profile', {
         connectSid,
         style: 'style.css',
@@ -133,7 +148,7 @@ router.get('/profile', async (req, res) => {
     })
 })
 
-router.get('/profile/:uid', async (req, res) => {
+router.get('/profile/:uid', isAuthenticated, async (req, res) => {
     res.render('uploadProfile', {
         style: 'style.css',
         user: res.locals.user
