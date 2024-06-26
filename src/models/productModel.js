@@ -8,7 +8,8 @@ const productSchema = new mongoose.Schema({
     category: { type: String },
     availability: { type: Boolean, default: true },
     stock: { type: Number, default: 0 },
-    thumbnail: { type: String }
+    thumbnail: { type: String },
+    owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 }, { timestamps: true })
 
 productSchema.plugin(mongoosePaginate)

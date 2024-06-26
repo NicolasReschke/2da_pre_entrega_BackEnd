@@ -1,13 +1,8 @@
 <body>
     {{#if user}}
-        <h3>Bienvenido, 
+        <h3 class="text-center">Bienvenido, 
             <strong>
                 {{user.first_name}}
-            </strong>
-        </h3>
-        <h3>Carrito ID: 
-            <strong>
-                {{user.cart._id}}
             </strong>
         </h3>
     {{else}}
@@ -18,8 +13,6 @@
         </h3>
     {{/if}}
 
-    <br>
-    <br>
     <br>
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -50,13 +43,53 @@
             </div>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <button class="carousel-control-prev btn btn-outline" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+            <span class="visually-hidden"></span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <button class="carousel-control-next btn btn-outline" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+            <span class="visually-hidden"></span>
         </button>
     </div>
+    <br>
+    <br>
+    <div class="section">
+        <h2>Productos Más Vendidos</h2>
+        <div class="row">
+            {{#each bestsellingProducts}}
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.name}}</h5>
+                            <p class="card-text">{{this.description}}</p>
+                            <a href="/product/{{this._id}}" class="btn btn-primary">Ver Detalles</a>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+    <br>
+    <br>
+    {{#if user}}
+        <div class="section">
+            <h2>Tus Productos Favoritos</h2>
+            <div class="row">
+                {{#each user.favorites}}
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.name}}</h5>
+                            <p class="card-text">{{this.description}}</p>
+                            <a href="/product/{{this._id}}" class="btn btn-primary">Ver Detalles</a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    {{/if}}
 </body>

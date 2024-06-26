@@ -1,34 +1,23 @@
 import passport from 'passport'
+import dotenv from 'dotenv'
+import { registerUser, initializeAdmins } from '../services/userService.js'
 
-import User from '../models/userModel.js'
-import Cart from '../models/cartModel.js'
+dotenv.config()
 
-export const registerUser = async (req, res) => {
+export const registerUserHandler = async (req, res) => {
     const { first_name, last_name, email, age, password, password2 } = req.body
+    const userData = { first_name, last_name, email, age, password, password2 }
+
     try {
-        const existingUser = await User.findOne({ email })
-        if (password !== password2) {
-            return res.redirect('/register?error=Las contraseñas no coinciden.')
-        }
-        if (existingUser) {
-            return res.redirect('/register?error=El email ya está en uso.')
-        }
-
-        const newUser = new User({ first_name, last_name, email, age, password })
-
-        const newCart = new Cart()
-        await newCart.save()
-        newUser.cart = newCart._id
-        await newUser.save()
-
+        await registerUser(userData)
         return res.redirect('/login?success=Usuario registrado correctamente. Por favor, inicie sesión.')
     } catch (error) {
         console.error('Error al registrar el usuario:', error)
-        return res.redirect('/register?error=Ocurrió un error al registrar el usuario. Por favor, intenta nuevamente.')
+        return res.redirect('/register?error=' + encodeURIComponent(error.message))
     }
 }
 
-export const loginUser = (req, res, next) => {
+export const loginUserHandler = (req, res, next) => {
     passport.authenticate('local', async (err, user, info) => {
         if (err) {
             return next(err)
@@ -59,4 +48,8 @@ export const googleCallback = (req, res, next) => {
         failureRedirect: '/login?error=Autenticación con Google fallida.',
         successRedirect: '/products'
     })(req, res, next)
+}
+
+export const initializeAdminsHandler = async () => {
+    await initializeAdmins()
 }

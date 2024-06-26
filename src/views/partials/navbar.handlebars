@@ -14,12 +14,12 @@
                     <a class="nav-link active" href="/">Inicio</a>
                 </li>
                 {{#if user}}
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="/products">Productos</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link active dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Categorias
+                            Categorías
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                             <li><a class="dropdown-item" href="/products/category/Accessories">Accessories</a></li>
@@ -32,6 +32,22 @@
                         </ul>
                     </li>
                 {{/if}}
+                {{!-- {{#if user.isAdmin}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin">Admin</a>
+                    </li>
+                {{/if}}
+                {{#if user.isSuperAdmin}}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active dropdown-toggle" href="#" id="navbarSuperadminDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Superadmin
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarSuperadminDropdownMenuLink">
+                            <li><a class="dropdown-item" href="/admin/products">Administrar Productos</a></li>
+                            <li><a class="dropdown-item" href="/admin/users">Administrar Usuarios</a></li>
+                        </ul>
+                    </li>
+                {{/if}} --}}
             </ul>
 
             <hr class="d-md-none text-white-50">
@@ -44,15 +60,15 @@
                             <span class="position-absolute top-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
                                 <span class="visually-hidden"></span>
                             </span>
-                            <img src="{{user.profile_image}}" class="profile-image">
+                            <img src="{{user.profile_image}}" class="profile-image" style="width: 45px;">
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                            <li><a class="dropdown-item" href="/profile">Ver Perfil</a>
-                                
-                            </li>
+                            <li><a class="dropdown-item" href="/profile">Ver Perfil</a></li>
                             <li><a class="dropdown-item" href="/profile/{{user._id}}">Editar Perfil</a></li>
                             <li><a class="dropdown-item" href="/carts/{{user.cart._id}}">Carrito</a></li>
-                            <li><a class="dropdown-item" href="#"><del>Vender</del></a></li>
+                            <li><a class="dropdown-item" href="#"><del>Publicar un producto</del></a></li>
+                            <li><a class="dropdown-item" href="#"><del>Editar un producto</del></a></li>
+                            <li><a class="dropdown-item" href="#"><del>Eliminar un producto</del></a></li>
                             <li><a class="dropdown-item" href="#"><del>Favoritos</del></a></li>
                             <li><a class="dropdown-item" href="#"><del>Notificaciones</del></a></li>
                             <li><a class="dropdown-item" href="#"><del>Envianos un mensaje!</del></a></li>

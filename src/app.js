@@ -14,6 +14,7 @@ import cookieParser from 'cookie-parser'
 import productsRouter from './routes/productsRouter.js'
 import cartsRouter from './routes/cartsRouter.js'
 import authRouter from './routes/authRouter.js'
+import userRouter from './routes/userRouter.js'
 import viewsRouter from './routes/viewsRouter.js'
 import sessionsRouter from './routes/sessionsRouter.js'
 import './config/passportConfig.js'
@@ -31,12 +32,12 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URI,
-        ttl: 7 * 24 * 60 * 60
+        mongoUrl: process.env.MONGODB_URL,
+        ttl: 10 * 60 * 1000 //5min //7 * 24 * 60 * 60 * 1000 // 7 dias
     }),
     cookie: { 
         secure: false, //Cambiar a true si en producción usamos https!!!
-        maxAge: 7 * 24 * 60 * 60 * 1000
+        maxAge: 10 * 60 * 1000 //5min //7 * 24 * 60 * 60 * 1000 // 7 dias
     }
 }))
 
@@ -44,7 +45,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use(cookieParser())
-
 app.use(methodOverride('_method'))
 
 app.use((req, res, next) => {
@@ -63,11 +63,12 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/', authRouter)
-app.use('/', viewsRouter)
 app.use('/api/products', productsRouter)
 app.use('/api/carts', cartsRouter)
 app.use('/api/sessions', sessionsRouter)
+app.use('/', authRouter)
+app.use('/', userRouter)
+app.use('/', viewsRouter)
 
 const PORT = process.env.PORT
 server.listen(PORT, () => {

@@ -2,14 +2,17 @@ import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
 
 const userSchema = new mongoose.Schema({
+    email: { type: String, unique: true },
+    password: String,
     first_name: String,
     last_name: String,
-    email: { type: String, unique: true },
+    profile_image: { type: String, default: '/uploads/default.jpg' },
     age: Number,
-    password: String,
-    role: { type: String, default: 'user' },
     cart: { type: mongoose.Schema.Types.ObjectId, ref: 'Cart' },
-    profile_image: { type: String, default: '/uploads/default.jpg' }
+    role: { type: String, default: 'user' },
+    messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
+    ratings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rating' }],
+    notifications: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Notification' }]
 }, { timestamps: true })
 
 userSchema.pre('save', async function (next) {
