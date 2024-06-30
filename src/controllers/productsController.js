@@ -1,32 +1,11 @@
-import Product from '../models/productModel.js'
+import {
+    getProducts as getProductsService,
+    getCategories as getCategoriesService
+} from '../services/productService.js'
 
-//http://localhost:8080/api/products?limit=5&page=1&sort=desc&categories=Accessories (Ejemplo)
 export const getProducts = async (req, res) => {
     try {
-        const { limit = 10, page = 1, sort, query, categories } = req.query
-        const options = {
-            limit: parseInt(limit),
-            page: parseInt(page),
-            sort: sort ? { price: sort } : {}
-        }
-
-        let filter = {}
-        if (query) {
-            filter.name = { $regex: query, $options: 'i' }
-        }
-        if (categories) {
-            filter.category = { $in: categories.split(',') }
-        }
-
-        if (isNaN(options.page) || options.page < 1 || isNaN(options.limit) || options.limit < 1) {
-            return res.status(400).json({ status: 'error', message: 'Número de página o límite inválido' })
-        }
-
-        const products = await Product.paginate(filter, options)
-
-        if (options.page > products.totalPages) {
-            return res.status(404).json({ status: 'error', message: 'Página no encontrada' })
-        }
+        const products = await getProductsService(req.query)
 
         res.json({
             status: 'success',
@@ -36,7 +15,7 @@ export const getProducts = async (req, res) => {
             hasPrevPage: products.hasPrevPage,
             hasNextPage: products.hasNextPage,
             prevPage: products.prevPage,
-            nextPage: products.nextPage
+            nextPage: products.nextPage,
         })
     } catch (error) {
         res.status(500).json({ status: 'error', message: error.message })
@@ -45,7 +24,7 @@ export const getProducts = async (req, res) => {
 
 export const getCategories = async (req, res) => {
     try {
-        const categories = await Product.distinct('category')
+        const categories = await getCategoriesService()
         res.json({ status: 'success', categories })
     } catch (err) {
         res.status(500).json({ status: 'error', message: err.message })

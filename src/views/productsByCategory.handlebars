@@ -41,7 +41,7 @@
                 const productStock = event.target.getAttribute('data-product-stock')
 
                 try {
-                    const { value: cantidad } = await Swal.fire({
+                    const { value: quantity } = await Swal.fire({
                         title: 'Selecciona la cantidad',
                         input: 'number',
                         inputLabel: 'Cantidad:',
@@ -64,13 +64,13 @@
                         }
                     })
 
-                    if (cantidad) {
+                    if (quantity) {
                         const response = await fetch(`/api/carts/${cartId}/products/${productId}`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
-                            body: JSON.stringify({ productId, cantidad })
+                            body: JSON.stringify({ productId, quantity })
                         })
                         const data = await response.json()
 

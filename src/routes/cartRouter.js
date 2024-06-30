@@ -4,8 +4,8 @@ import {
     addProductToCart,
     updateProductQuantity,
     deleteProductFromCart,
-    deleteAllProductsFromCart,
-} from '../controllers/cartsController.js'
+    deleteAllProductsFromCart
+} from '../controllers/cartController.js'
 
 const router = Router()
 

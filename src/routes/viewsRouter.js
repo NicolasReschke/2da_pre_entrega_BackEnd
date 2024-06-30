@@ -125,7 +125,6 @@ router.get('/register', async (req, res) => {
 })
 
 router.get('/profile', isAuthenticated, async (req, res) => {
-    const connectSid = req.cookies['connect.sid']
 
     const user = res.locals.user
     const options = { 
@@ -142,7 +141,6 @@ router.get('/profile', isAuthenticated, async (req, res) => {
     user.formattedUpdatedAt = new Intl.DateTimeFormat('es-AR', options).format(new Date(user.updatedAt))
 
     res.render('profile', {
-        connectSid,
         style: 'style.css',
         user: res.locals.user
     })

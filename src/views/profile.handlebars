@@ -20,21 +20,17 @@
             </div>
             <div class="card-body">
                 <a href="/profile/{{user._id}}"><button class="btn btn-success">Editar mi perfil</button></a>
-                <button id="deleteProfileBtn" class="btn btn-danger">Eliminar cuenta</button>
                 <br><br>
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <div class="accordion-header" id="headingOne">
-                            <button class="accordion-button collapsed btn btn-outline-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                /api/sessions/current
+                            <button class="accordion-button collapsed btn btn-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                Eliminar cuenta
                             </button>
                         </div>
                         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body" id="currentUserDetails">
-                                <p>(Sólo para 2da práctica integradora o para probar por Postman)</p>
-                                <strong>key</strong><p>Cookie</p>
-                                <strong>Value</strong><p>connect.sid={{connectSid}}</p>
-                                </ul>
+                                <button id="deleteProfileBtn" class="btn btn-outline-danger" style="margin-top: 10px;">☠ Si, deseo eliminar mi cuenta ☠</button>
                             </div>
                         </div>
                     </div>

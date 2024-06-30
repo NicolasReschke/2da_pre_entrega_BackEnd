@@ -79,15 +79,15 @@ export const registerUser = async (userData) => {
 }
 
 export const initializeAdmins = async () => {
-    const superadminEmail = process.env.SUPERADMIN_EMAIL
-    const superAdminPassword = process.env.SUPERADMIN_PASSWORD
+    /* const superadminEmail = process.env.SUPERADMIN_EMAIL
+    const superAdminPassword = process.env.SUPERADMIN_PASSWORD */
     const adminEmail = process.env.ADMIN_EMAIL
     const adminPassword = process.env.ADMIN_PASSWORD
 
-    const superadmin = await findUserByEmail(superadminEmail)
+    /* const superadmin = await findUserByEmail(superadminEmail) */
     const admin = await findUserByEmail(adminEmail)
 
-    if (!superadmin) {
+    /* if (!superadmin) {
         await createSuperadmin({
             first_name: 'SuperAdmin',
             email: superadminEmail,
@@ -95,7 +95,7 @@ export const initializeAdmins = async () => {
             role: 'superadmin'
         })
         console.log('Superadmin user created.')
-    }
+    } */
 
     if (!admin) {
         await createAdmin({
