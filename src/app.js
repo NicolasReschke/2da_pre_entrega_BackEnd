@@ -15,7 +15,6 @@ import cartRouter from './routes/cartRouter.js'
 import authRouter from './routes/authRouter.js'
 import userRouter from './routes/userRouter.js'
 import viewsRouter from './routes/viewsRouter.js'
-import sessionsRouter from './routes/sessionsRouter.js'
 import './config/passportConfig.js'
 
 dotenv.config()
@@ -63,7 +62,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/api/products', productsRouter)
 app.use('/api/carts', cartRouter)
-app.use('/api/sessions', sessionsRouter)
 app.use('/', authRouter)
 app.use('/', userRouter)
 app.use('/', viewsRouter)

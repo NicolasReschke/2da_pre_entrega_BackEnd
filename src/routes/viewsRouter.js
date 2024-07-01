@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { isAuthenticated } from '../middleware/isAuthenticated.js'
+import { isAdmin } from '../middleware/isAdmin.js'
 import User from '../models/userModel.js'
 import Cart from '../models/cartModel.js'
 import Product from '../models/productModel.js'
@@ -152,5 +153,26 @@ router.get('/profile/:uid', isAuthenticated, async (req, res) => {
         user: res.locals.user
     })
 })
+
+/* router.get('/dashboard', isAuthenticated, async (req, res) => {
+    res.render('adminDashboard', {
+        style: 'style.css',
+        user: res.locals.user
+    })
+})
+
+router.get('/dashboard', isAdmin, async (req, res) => {
+    res.render('adminProductsDashboard', {
+        style: 'style.css',
+        user: res.locals.user
+    })
+})
+
+router.get('/dashboard/', isAdmin, async (req, res) => {
+    res.render('adminAddProductsDashboard', {
+        style: 'style.css',
+        user: res.locals.user
+    })
+}) */
 
 export default router
