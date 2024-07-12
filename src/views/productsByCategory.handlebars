@@ -17,7 +17,7 @@
         {{#each products}}
         <div class="col-md-4 mb-4">
             <div class="card">
-                <img src="{{this.thumbnail}}" class="card-img-top img-fluid card-img-custom">
+                <img src="{{this.thumbnail}}" class="card-img-top img-fluid card-img-custom" style="width: 350px; height: 250px">
                 <div class="card-body">
                     <h5 class="card-title">{{this.name}}</h5>
                     <p class="card-text">{{this.description}}</p>
@@ -38,13 +38,13 @@
             button.addEventListener('click', async (event) => {
                 const productId = event.target.getAttribute('data-product-id')
                 const cartId = '{{cartId}}'
-                const productStock = event.target.getAttribute('data-product-stock')
+                const productStock = parseInt(button.getAttribute('data-product-stock'), 10)
 
                 try {
-                    const { value: quantity } = await Swal.fire({
+                    const { value: cantidad } = await Swal.fire({
                         title: 'Selecciona la cantidad',
                         input: 'number',
-                        inputLabel: 'Cantidad:',
+                        inputLabel: '`Cantidad (máximo ${productStock} unidades):`',
                         inputPlaceholder: 'Ingrese la cantidad',
                         inputAttributes: {
                             min: 1,
@@ -56,21 +56,24 @@
                         cancelButtonText: 'Cancelar',
                         allowOutsideClick: false,
                         inputValidator: (value) => {
+                            const cantidad = parseInt(value, 10)
                             if (!value) {
                                 return 'Debes ingresar una cantidad'
-                            } else if (value > productStock) {
+                            } else if (cantidad > productStock) {
                                 return `Solo puedes agregar hasta ${productStock} unidades`
+                            } else if (cantidad < 1) {
+                                return 'La cantidad debe ser al menos 1'
                             }
                         }
                     })
 
-                    if (quantity) {
+                    if (cantidad) {
                         const response = await fetch(`/api/carts/${cartId}/products/${productId}`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
-                            body: JSON.stringify({ productId, quantity })
+                            body: JSON.stringify({ productId, cantidad })
                         })
                         const data = await response.json()
 
