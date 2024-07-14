@@ -95,8 +95,8 @@ export const purchaseCart = async (cartId, user) => {
         cart.products = cart.products.filter(cartProduct => unavailableProducts.includes(cartProduct.product._id))
         await cartRepository.updateCart(cart)
 
-
-    await sendPurchaseEmail(user, purchasedProducts, ticket.code)
+    console.log('Ticket:', ticket);
+    await sendPurchaseEmail(user, purchasedProducts, ticket.code, ticket.amount)
 
     return { ticket, unavailableProducts }
     } else {

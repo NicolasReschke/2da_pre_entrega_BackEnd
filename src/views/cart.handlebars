@@ -55,8 +55,8 @@
             <div class="text-center" style= "justify-content: space-around; display:flex">
                     <a class="btn btn-info" href="/products">Seguir Comprando...</a>
                     <button class="btn btn-danger" onclick="emptyCart()">Vaciar carrito</button>
-                    <h3 class="text-end">Total: ${{calculateTotal cart.products}}</h3>
                     <button id="finalize-purchase" class="btn btn-success">Finalizar Compra</button>
+                    <h3 class="text-end">Total: ${{calculateTotal cart.products}}</h3>
             </div>
         {{else}}
             <h2 class="text-center mt-4">No tienes productos en tu carrito 😓</h2>
