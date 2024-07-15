@@ -82,6 +82,8 @@ export const purchaseCart = async (cartId, user) => {
         }
     }
 
+    const purchasedProductsEmail = cart.products.filter(cartProduct => !unavailableProducts.includes(cartProduct.product._id))
+
     if (purchasedProducts.length > 0) {
         const ticket = new Ticket({
             code: uuidv4(),
@@ -91,6 +93,7 @@ export const purchaseCart = async (cartId, user) => {
         })
 
         await ticketRepository.createTicket(ticket)
+        console.log('Ticket creado:', ticket)
 
         cart.products = cart.products.filter(cartProduct => unavailableProducts.includes(cartProduct.product._id))
         await cartRepository.updateCart(cart)
@@ -98,8 +101,7 @@ export const purchaseCart = async (cartId, user) => {
         user.purchases.push(ticket._id)
         await user.save()
 
-        await sendPurchaseEmail(user, purchasedProducts, ticket.code, ticket.amount)
-
+        await sendPurchaseEmail(user, purchasedProductsEmail, ticket.code, ticket.amount)
         return { ticket, unavailableProducts }
     } else {
         return { ticket: null, unavailableProducts }
