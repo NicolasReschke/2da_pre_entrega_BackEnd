@@ -98,7 +98,7 @@ export const getPurchase = async (req, res) => {
     const { phoneNumber } = req.body
 
     try {
-        const { ticket, unavailableProducts } = await purchaseCartService(cid, user)
+        const { ticket } = await purchaseCartService(cid, user)
         if (ticket) {
             if (method === 'sms' && phoneNumber) {
                 const message = `Tu compra ha sido confirmada. Código de compra: ${ticket.code}, Monto: $${ticket.amount}`
@@ -111,7 +111,7 @@ export const getPurchase = async (req, res) => {
 
             res.json({ status: 'success', message: 'Compra realizada', ticket })
         } else {
-            res.status(400).json({ status: 'error', message: 'No se pudo completar la compra. Productos no disponibles.', unavailableProducts })
+            res.status(400).json({ status: 'error', message: 'No se pudo completar la compra.' })
         }
     } catch (err) {
         res.status(500).json({ status: 'error', message: err.message })
