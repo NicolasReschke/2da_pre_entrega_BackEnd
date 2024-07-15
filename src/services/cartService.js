@@ -68,6 +68,7 @@ export const purchaseCart = async (cartId, user) => {
 
     const unavailableProducts = []
     let totalAmount = 0
+    const purchasedProducts = []
 
     for (const cartProduct of cart.products) {
         const product = await productRepository.getProductById(cartProduct.product._id)
@@ -77,28 +78,29 @@ export const purchaseCart = async (cartId, user) => {
             product.stock -= cartProduct.quantity
             await productRepository.updateProductStock(product)
             totalAmount += product.price * cartProduct.quantity
+            purchasedProducts.push({ product: cartProduct.product._id, quantity: cartProduct.quantity })
         }
     }
-
-    const purchasedProducts = cart.products.filter(cartProduct => !unavailableProducts.includes(cartProduct.product._id))
 
     if (purchasedProducts.length > 0) {
         const ticket = new Ticket({
             code: uuidv4(),
             amount: totalAmount,
             purchaser: user.email,
+            products: purchasedProducts
         })
-        console.log(ticket)
 
         await ticketRepository.createTicket(ticket)
 
         cart.products = cart.products.filter(cartProduct => unavailableProducts.includes(cartProduct.product._id))
         await cartRepository.updateCart(cart)
 
-    console.log('Ticket:', ticket);
-    await sendPurchaseEmail(user, purchasedProducts, ticket.code, ticket.amount)
+        user.purchases.push(ticket._id)
+        await user.save()
 
-    return { ticket, unavailableProducts }
+        await sendPurchaseEmail(user, purchasedProducts, ticket.code, ticket.amount)
+
+        return { ticket, unavailableProducts }
     } else {
         return { ticket: null, unavailableProducts }
     }

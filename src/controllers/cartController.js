@@ -102,7 +102,11 @@ export const getPurchase = async (req, res) => {
         if (ticket) {
             if (method === 'sms' && phoneNumber) {
                 const message = `Tu compra ha sido confirmada. Código de compra: ${ticket.code}, Monto: $${ticket.amount}`
-                await sendSMS(phoneNumber, message)
+                try {
+                    await sendSMS(phoneNumber, message)
+                } catch (error) {
+                    console.error('Error enviando el SMS:', error)
+                }
             }
 
             res.json({ status: 'success', message: 'Compra realizada', ticket })

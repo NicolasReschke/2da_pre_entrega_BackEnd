@@ -182,6 +182,26 @@ router.get('/chat', authorizeRoles(['user', 'admin']), async (req, res) => {
     }
 })
 
+router.get('/purchases', authorizeRoles(['user']), async (req, res) => {
+    const user = req.user
+    try {
+        const populatedUser = await User.findById(user._id).populate({
+            path: 'purchases',
+            populate: {
+                path: 'products.product',
+                model: 'Product'
+            }
+        })
+        res.render('userPurchases', {
+            style: 'style.css',
+            user: res.locals.user,
+            purchases: populatedUser.purchases
+        })
+    } catch (err) {
+        res.status(500).json({ status: 'error', message: err.message })
+    }    
+})
+
 router.get('/adminDashboard', authorizeRoles(['admin']), async (req, res) => {
     res.render('adminDashboard', {
         style: 'style.css',
