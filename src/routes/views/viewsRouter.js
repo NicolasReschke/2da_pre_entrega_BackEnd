@@ -59,7 +59,7 @@ router.get('/products/:pid', authorizeRoles(['user', 'admin']), async (req, res)
         const cartId = user.cart._id
 
         const productId = req.params.pid
-        const product = await Product.findById(productId).lean()
+        const product = await Product.findById(productId)
         const options = { 
             weekday: 'long', 
             year: 'numeric', 

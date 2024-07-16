@@ -96,6 +96,18 @@
     </style>
 
     <script>
+        function formatDate(dateString) {
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric', 
+                hour: 'numeric', 
+                minute: 'numeric', 
+            }
+            const date = new Date(dateString)
+            return date.toLocaleDateString('es-AR', options)
+        }
+    
         document.addEventListener('DOMContentLoaded', async () => {
             await loadCategories()
             fetchProducts()
@@ -159,11 +171,15 @@
                                     <p class="card-text"><strong>Precio:</strong> $${product.price}</p>
                                     <p class="card-text"><strong>Stock:</strong> ${product.stock}</p>
                                     {{#if (equals user.role "user")}}
-                                        <button class="add-cart btn btn-success" data-product-id="${product._id}" data-product-stock="${product.stock}">Agregar al carrito</button>
+                                        ${product.stock === 0 ?
+                                        `<button class="btn btn-danger" disabled>Sin stock</button>` : 
+                                        (product.stock !== 0 ? 
+                                            `<button class="add-cart btn btn-success" data-product-id="${product._id}" data-product-stock="${product.stock}">Agregar al carrito</button>` : 
+                                            ``)}
                                     {{/if}}
                                 </div>
                                 <div class="card-footer">
-                                    <small class="text-muted">Updated ${product.updatedAt}</small>
+                                    <small class="text-muted">Updated: ${formatDate(product.updatedAt)}</small>
                                 </div>
                             </div>
                         </div>

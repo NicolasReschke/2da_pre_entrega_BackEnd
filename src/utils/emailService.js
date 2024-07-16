@@ -3,8 +3,8 @@ import transporter from '../config/emailConfigs.js'
 
 dotenv.config()
 
-export const sendPurchaseEmail = async (user, purchasedProducts, ticketCode, ticketAmount) => {
-    const formattedDetails = purchasedProducts.map(item => {
+export const sendPurchaseEmail = async (user, purchasedProductsEmail, ticketCode, ticketAmount) => {
+    const formattedDetails = purchasedProductsEmail.map(item => {
         return `Producto: ${item.product.name}\nDescripción: ${item.product.description}\nPrecio unitario: $${item.product.price}\nCantidad: ${item.quantity}\n\n`
     }).join('')
 
