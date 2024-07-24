@@ -1,14 +1,15 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import { engine } from 'express-handlebars'
-import mongoose from './config/dbConfig.js'
-import MongoStore from 'connect-mongo'
 import session from 'express-session'
-import { createServer } from 'http'
-import path from 'path'
-import { fileURLToPath } from 'url'
+import mongoose from './config/dbConfig.js'
 import passport from 'passport'
 import methodOverride from 'method-override'
+import MongoStore from 'connect-mongo'
+import path from 'path'
+import bodyParser from 'body-parser'
+import { engine } from 'express-handlebars'
+import { createServer } from 'http'
+import { fileURLToPath } from 'url'
 
 import productsRouter from './routes/api/productsRouter.js'
 import userRouter from './routes/api/userRouter.js'
@@ -16,6 +17,7 @@ import cartRouter from './routes/api/cartRouter.js'
 import chatRouter from './routes/api/chatRouter.js'
 import viewsRouter from './routes/views/viewsRouter.js'
 import './config/passportConfig.js'
+import handleErrors from './middlewares/errorHandler.js'
 
 dotenv.config()
 
@@ -41,6 +43,8 @@ app.use(session({
 
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(handleErrors)
+app.use(bodyParser.json())
 
 app.use(methodOverride('_method'))
 

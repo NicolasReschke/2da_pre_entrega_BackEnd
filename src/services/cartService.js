@@ -93,7 +93,6 @@ export const purchaseCart = async (cartId, user) => {
         })
 
         await ticketRepository.createTicket(ticket)
-        console.log('Ticket creado:', ticket)
 
         cart.products = cart.products.filter(cartProduct => unavailableProducts.includes(cartProduct.product._id))
         await cartRepository.updateCart(cart)
