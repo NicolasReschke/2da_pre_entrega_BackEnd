@@ -18,6 +18,8 @@ import chatRouter from './routes/api/chatRouter.js'
 import viewsRouter from './routes/views/viewsRouter.js'
 import './config/passportConfig.js'
 import handleErrors from './middlewares/errorHandler.js'
+import logger from './utils/logger.js'
+import loggerRouter from './routes/api/loggerRouter.js'
 
 dotenv.config()
 
@@ -40,6 +42,16 @@ app.use(session({
         maxAge: 30 * 60 * 1000 //30min //7 * 24 * 60 * 60 * 1000 // 7 dias
     }
 }))
+
+app.use((req, res, next) => {
+    logger.http(`${req.method} ${req.url}`)
+    next()
+})
+
+app.use((err, req, res, next) => {
+    logger.error(`${err.message}`)
+    res.status(500).send('Something went wrong!')
+})
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -84,8 +96,16 @@ app.use('/api/carts', cartRouter)
 app.use('/api/chat', chatRouter)
 app.use('/', userRouter)
 app.use('/', viewsRouter)
+app.use('/', loggerRouter)
 
 const PORT = process.env.PORT
+const LOGGER = process.env.LOGGER_ENV
+
 server.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}/login`)
+    if (LOGGER === 'production') {
+        console.log('Logger is in production mode')
+    } else {
+        console.log('Logger is in development mode')
+    }
 })

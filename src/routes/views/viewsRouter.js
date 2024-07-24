@@ -324,4 +324,10 @@ router.get('/mockingProducts/create', async (req, res) => {
     })
 })
 
+router.get('/loggerTestView', (req, res) => {
+    res.render('loggerTestView', {
+        style: 'style.css'
+    })
+})
+
 export default router

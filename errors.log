@@ -1,0 +1,22 @@
+2024-07-24 02:26:53 [31merror[39m: This is a error log message
+2024-07-24 02:28:40 [31merror[39m: This is a error log message
+2024-07-24 02:28:46 [35mfatal[39m: This is a fatal log message
+2024-07-24 02:29:52 [31merror[39m: [31mThis is a error log message[39m
+2024-07-24 02:30:05 [35mfatal[39m: [35mThis is a fatal log message[39m
+2024-07-24 02:31:28 [31merror[39m: [31mThis is a error log message[39m
+[31merror[39m: [31mThis is a error log message[39m
+2024-07-24 02:37:31 [31merror[39m: [31mThis is a error log message[39m
+2024-07-24 02:39:18 [31merror[39m: [31mThis is a error log message[39m
+2024-07-24 02:40:02 [35mfatal[39m: [35mThis is a fatal log message[39m
+[31merror[39m: This is a error log message
+[35mfatal[39m: This is a fatal log message
+2024-07-24 02:58:18 error: This is a error log message
+2024-07-24 02:58:20 fatal: This is a fatal log message
+2024-07-24 03:07:29 [31merror[39m: This is a error log message
+2024-07-24 03:08:18 [31merror[39m: This is a error log message
+2024-07-24 03:08:37 fatal: This is a fatal log message
+2024-07-24 03:08:43 error: This is a error log message
+2024-07-24 03:13:56 error: This is a error log message
+2024-07-24 03:13:58 fatal: This is a fatal log message
+2024-07-24 03:14:30 [31merror[39m: [31mThis is a error log message[39m
+2024-07-24 03:14:33 [35mfatal[39m: [35mThis is a fatal log message[39m

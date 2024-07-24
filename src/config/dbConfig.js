@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 
 import { initializeAdmins } from '../services/userService.js'
-import { initializeMockProducts } from '../services/productsService.js'
+/* import { initializeMockProducts } from '../services/productsService.js' */
 
 dotenv.config()
 
@@ -15,7 +15,7 @@ const db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', () => {
     initializeAdmins()
-    initializeMockProducts()
+    /* initializeMockProducts() */
     console.log('Connected to MongoDB')
 })
 
