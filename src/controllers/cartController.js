@@ -7,6 +7,7 @@ import {
     purchaseCart as purchaseCartService,
 } from '../services/cartService.js'
 import { sendSMS } from '../utils/smsService.js'
+import logger from '../utils/logger.js'
 
 export const getCart = async (req, res) => {
     try {
@@ -51,8 +52,10 @@ export const addProductToCart = async (req, res) => {
 
     try {
         await addProductToCartService(cid, pid, cantidad)
+        logger.info(`Producto ${pid} agregado al carrito ${cid} con cantidad ${cantidad}`)
         res.json({ status: 'success', message: 'Producto agregado al carrito' })
     } catch (err) {
+        logger.error(`Error al agregar producto ${pid} al carrito ${cid}: ${err.message}`)
         res.status(500).json({ status: 'error', message: err.message })
     }
 }

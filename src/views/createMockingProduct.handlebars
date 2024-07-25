@@ -11,7 +11,7 @@
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Descripción</label>
-            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+            <textarea class="form-control" id="description" name="description"></textarea>
         </div>
         <div class="mb-3">
             <label for="category" class="form-label">Categoría</label>
@@ -19,10 +19,10 @@
         </div>
         <div class="mb-3">
             <label for="stock" class="form-label">Stock</label>
-            <input type="number" class="form-control" id="stock" name="stock">
+            <input type="text" class="form-control" id="stock" name="stock">
         </div>
         <div class="mb-3">
-            <label for="thumbnail" class="form-label">URL de la Imagen</label>
+            <label for="thumbnail" class="form-label">Thumbnail</label>
             <input type="text" class="form-control" id="thumbnail" name="thumbnail">
         </div>
         <button type="submit" class="btn btn-primary">Crear Producto</button>
@@ -33,30 +33,64 @@
 <script>
     document.getElementById('createProductForm').addEventListener('submit', async (e) => {
         e.preventDefault()
-        const formData = new FormData(e.target)
-        const product = Object.fromEntries(formData.entries())
+
+        const name = document.getElementById('name').value.trim()
+        const price = document.getElementById('price').value.trim()
+        const description = document.getElementById('description').value.trim()
+        const category = document.getElementById('category').value.trim()
+        const stock = document.getElementById('stock').value.trim()
+        const thumbnail = document.getElementById('thumbnail').value.trim()
+
+        if (!name || !price) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Faltan completar campos: ' + (!name ? 'Nombre' : 'Precio'),
+            })
+            return
+        }
 
         try {
             const response = await fetch('/api/products/mockingProducts/create', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(product)
+                body: JSON.stringify({
+                    name,
+                    price,
+                    description,
+                    category,
+                    stock,
+                    thumbnail,
+                }),
             })
 
-            const data = await response.json()
-
-            const messageDiv = document.getElementById('message')
-            if (data.status === 'success') {
-                messageDiv.innerHTML = `<div class="alert alert-success">${data.message}</div>`
-                e.target.reset()
+            if (response.ok) {
+                const result = await response.json()
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Producto creado',
+                    text: result.message,
+                })
             } else {
-                messageDiv.innerHTML = `<div class="alert alert-danger">${data.message}</div>`
+                const errorResult = await response.json()
+                let errorMessage = 'Ha ocurrido un error'
+                if (errorResult.details && errorResult.details.fields) {
+                    errorMessage = `Faltan completar campos: ${errorResult.details.fields.join(', ')}`
+                }
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: errorMessage,
+                })
             }
         } catch (error) {
-            console.error(error)
-            document.getElementById('message').innerHTML = `<div class="alert alert-danger">Error al crear el producto.</div>`
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo crear el producto.',
+            })
         }
     })
 </script>

@@ -48,11 +48,6 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use((err, req, res, next) => {
-    logger.error(`${err.message}`)
-    res.status(500).send('Something went wrong!')
-})
-
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(handleErrors)
@@ -108,4 +103,9 @@ server.listen(PORT, () => {
     } else {
         console.log('Logger is in development mode')
     }
+})
+
+app.use((err, req, res, next) => {
+    logger.error(`${err.message}`)
+    res.status(500).send('Algo salió mal!')
 })

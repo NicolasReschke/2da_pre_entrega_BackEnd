@@ -7,6 +7,7 @@ import {
 import { createCustomError, errorTypes } from '../utils/errors.js'
 import MockingProduct from '../models/mockingProductsModel.js'
 import { generateMockProducts } from '../utils/generateMockProducts.js'
+import logger from '../utils/logger.js'
 
 export const getProducts = async (req, res) => {
     try {
@@ -102,12 +103,13 @@ export const createProduct = async (req, res, next) => {
 
         const savedProduct = await newProduct.save()
 
+        logger.info('Product created successfully', { product: savedProduct })
         res.status(201).json({
             status: 'success',
-            message: 'Producto creado correctamente!',
+            message: 'Producto creado correctamente',
             product: savedProduct
         })
     } catch (error) {
-        next(createCustomError(errorTypes.VALIDATION_ERROR, { message: error.message }))
+        next(error)
     }
 }
