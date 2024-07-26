@@ -64,3 +64,20 @@
 2024-07-24 23:50:20 [31merror[39m: [31mMockingProduct validation failed: price: Cast to Number failed for value "a" (type string) at path "price"[39m
 2024-07-24 23:50:43 [31merror[39m: [31mMockingProduct validation failed: price: Cast to Number failed for value "a" (type string) at path "price"[39m
 2024-07-24 23:52:15 [31merror[39m: [31mMockingProduct validation failed: price: Cast to Number failed for value "a" (type string) at path "price"[39m
+2024-07-25 21:37:50 [31merror[39m: [31mThis is a error log message[39m
+2024-07-25 21:37:59 [35mfatal[39m: [35mThis is a fatal log message[39m
+2024-07-25 21:45:50 [31merror[39m: [31mFaltan completar campos: {"fields":["name"]}[39m
+2024-07-25 21:47:28 [31merror[39m: [31mMockingProduct validation failed: price: Cast to Number failed for value "a" (type string) at path "price"[39m
+2024-07-25 21:49:35 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc79 al carrito 6680b82d69a514f664414981: Carrito no encontrado[39m
+2024-07-25 22:02:22 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc79 al carrito 668f3ac1dce6f2f89393e1db: Assignment to constant variable.[39m
+2024-07-25 22:02:45 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc79 al carrito 668f3ac1dce6f2f89393e1db: Assignment to constant variable.[39m
+2024-07-25 22:03:08 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc79 al carrito 668f3ac1dce6f2f89393e1db: logger.warn is not a function[39m
+2024-07-25 22:03:28 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc79 al carrito 668f3ac1dce6f2f89393e1db: Assignment to constant variable.[39m
+2024-07-25 22:03:33 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc79 al carrito 668f3ac1dce6f2f89393e1db: Assignment to constant variable.[39m
+2024-07-25 22:04:10 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc79 al carrito 668f3ac1dce6f2f89393e1db: Assignment to constant variable.[39m
+2024-07-25 22:05:01 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc79 al carrito 668f3ac1dce6f2f89393e1db: Assignment to constant variable.[39m
+2024-07-25 22:05:16 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc79 al carrito 668f3ac1dce6f2f89393e1db: Assignment to constant variable.[39m
+2024-07-25 22:05:27 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc79 al carrito 668f3ac1dce6f2f89393e1db: Assignment to constant variable.[39m
+2024-07-25 22:06:17 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc79 al carrito 668f3ac1dce6f2f89393e1db: logger.warn is not a function[39m
+2024-07-25 22:10:31 [31merror[39m: [31mIntento de agregar al carrito con cantidad inválida: a[39m
+2024-07-25 22:10:59 [31merror[39m: [31mIntento de agregar al carrito con cantidad inválida: -1[39m

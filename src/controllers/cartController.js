@@ -51,6 +51,22 @@ export const addProductToCart = async (req, res) => {
     const { cantidad } = req.body
 
     try {
+        //http://localhost:8080/api/carts/668f3ac1dce6f2f89393e1db/products/665381fa74dba69ed7dedc79
+        /* Dato: solo funciona si lo probas por Postman, no por la web (ya q manejo los errores desde sweetalert)
+        inputValidator: (value) => {
+            const cantidad = parseInt(value, 10)
+            if (!value) {
+                return 'Debes ingresar una cantidad'
+            } else if (cantidad > productStock) {
+                return `Solo puedes agregar hasta ${productStock} unidades`
+            } else if (cantidad < 1) {
+                return 'La cantidad debe ser al menos 1'
+            }
+        } */
+        if (isNaN(cantidad) || cantidad <= 0) {
+            logger.error(`Intento de agregar al carrito con cantidad inválida: ${cantidad}`)
+            return res.status(400).json({ status: 'error', message: 'La cantidad debe ser un número mayor que 0' })
+        }
         await addProductToCartService(cid, pid, cantidad)
         logger.info(`Producto ${pid} agregado al carrito ${cid} con cantidad ${cantidad}`)
         res.json({ status: 'success', message: 'Producto agregado al carrito' })
