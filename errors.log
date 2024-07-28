@@ -81,3 +81,17 @@
 2024-07-25 22:06:17 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc79 al carrito 668f3ac1dce6f2f89393e1db: logger.warn is not a function[39m
 2024-07-25 22:10:31 [31merror[39m: [31mIntento de agregar al carrito con cantidad inválida: a[39m
 2024-07-25 22:10:59 [31merror[39m: [31mIntento de agregar al carrito con cantidad inválida: -1[39m
+2024-07-26 18:32:47 [31merror[39m: [31mFaltan completar campos: {"fields":["price"]}[39m
+2024-07-26 18:32:52 [31merror[39m: [31mFaltan completar campos: {"fields":["price"]}[39m
+2024-07-26 18:33:33 [31merror[39m: [31mFaltan completar campos: {"fields":["name"]}[39m
+2024-07-26 18:41:14 [31merror[39m: [31mThis is a error log message[39m
+2024-07-26 18:41:24 [35mfatal[39m: [35mThis is a fatal log message[39m
+2024-07-28 16:24:03 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc77 al carrito 668f3ac1dce6f2f89393e1db: cart.save is not a function[39m
+2024-07-28 16:24:38 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc77 al carrito 668f3ac1dce6f2f89393e1db: cart.save is not a function[39m
+2024-07-28 16:28:25 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc77 al carrito 668f3ac1dce6f2f89393e1db: Cart.save is not a function[39m
+2024-07-28 16:33:53 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc77 al carrito 668f3ac1dce6f2f89393e1db: cart.save is not a function[39m
+2024-07-28 16:35:16 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc77 al carrito 668f3ac1dce6f2f89393e1db: cart.save is not a function[39m
+2024-07-28 16:38:13 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc77 al carrito 668f3ac1dce6f2f89393e1db: cart.save is not a function[39m
+2024-07-28 16:46:19 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc77 al carrito 668f3ac1dce6f2f89393e1db: cart.save is not a function[39m
+2024-07-28 18:54:34 [31merror[39m: [31mIntento de agregar al carrito con cantidad inválida: a[39m
+2024-07-28 18:54:43 [31merror[39m: [31mIntento de agregar al carrito con cantidad inválida: -3[39m
