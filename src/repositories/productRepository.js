@@ -3,6 +3,7 @@ import ProductDTO from '../dto/productDTO.js'
 import Product from '../models/productModel.js'
 
 const productDao = new ProductDaoMongo()
+//comentario de prueba
 
 export default {
     getAllProducts: async () => {
