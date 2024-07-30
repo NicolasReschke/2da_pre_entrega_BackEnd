@@ -95,3 +95,5 @@
 2024-07-28 16:46:19 [31merror[39m: [31mError al agregar producto 665381fa74dba69ed7dedc77 al carrito 668f3ac1dce6f2f89393e1db: cart.save is not a function[39m
 2024-07-28 18:54:34 [31merror[39m: [31mIntento de agregar al carrito con cantidad inválida: a[39m
 2024-07-28 18:54:43 [31merror[39m: [31mIntento de agregar al carrito con cantidad inválida: -3[39m
+2024-07-30 15:13:05 [31merror[39m: [31mThis is a error log message[39m
+2024-07-30 15:13:07 [35mfatal[39m: [35mThis is a fatal log message[39m
