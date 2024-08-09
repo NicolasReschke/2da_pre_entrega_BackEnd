@@ -17,9 +17,9 @@
             </div>
             <div class="card-body">
                 {{#if (equals user.role "user")}}
-                    <button class="btn btn-warning">Actualizar a Premium</button>
+                    <button class="btn btn-warning change-role">Actualizar a Usuario Premium</button>
                 {{else}}
-                    <button class="btn btn-warning">Actualizar a Usuario</button>
+                    <button class="btn btn-warning change-role">Actualizar a Usuario común</button>
                 {{/if}}
                 <br><br>
                 <a href="/forgot-password"><button class="btn btn-info">Cambiar contraseña</button></a>
@@ -82,6 +82,29 @@
                     }
                 })
             }
+        })
+    })
+
+    document.querySelector('.change-role').addEventListener('click', function() {
+        const userId = "{{user._id}}"
+        fetch(`/api/users/premium/${userId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.role) {
+                Swal.fire('Éxito', `El rol ha sido cambiado a ${data.role}`, 'success').then(() => {
+                    window.location.reload()
+                })
+            } else {
+                Swal.fire('Error', 'No se pudo cambiar el rol', 'error')
+            }
+        })
+        .catch(error => {
+            Swal.fire('Error', 'Hubo un problema al cambiar el rol', 'error')
         })
     })
 </script>

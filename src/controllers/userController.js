@@ -101,7 +101,7 @@ export const loginUserHandler = (req, res, next) => {
 export const forgotPassword = async (req, res) => {
     const { email } = req.body
     const user = await User.findOne({ email })
-    if (!user) return res.status(404).send('Correo no encontrado')
+    if (!user) return res.status(404).send('Usuario no encontrado')
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' })
     const link = `http://localhost:8080/reset-password/${token}`
@@ -140,6 +140,24 @@ export const resetPassword = async (req, res) => {
     user.password = await bcrypt.hash(password, 10)
     await user.save()
     res.send('Password has been reset')
+}
+
+export const changeUserRole = async (req, res) => {
+    try {
+        const userId = req.params.uid
+        const user = await User.findById(userId)
+
+        if (!user) {
+            return res.status(404).json({ error: 'Usuario no encontrado' })
+        }
+
+        user.role = user.role === 'user' ? 'premium' : 'user'
+        await user.save()
+
+        res.status(200).json({ message: 'Rol actualizado', role: user.role })
+    } catch (error) {
+        res.status(500).json({ error: 'Error interno del servidor' })
+    }
 }
 
 export const githubAuth = passport.authenticate('github', { scope: ['user:email'] })

@@ -8,6 +8,7 @@ import {
     registerUserHandler,
     forgotPassword,
     resetPassword,
+    changeUserRole,
     githubAuth,
     githubCallback,
     googleAuth,
@@ -26,6 +27,7 @@ router.post('/login', loginUserHandler)
 router.post('/register', registerUserHandler)
 router.post('/forgot-password', forgotPassword)
 router.post('/reset-password/:token', resetPassword)
+router.put('/api/users/premium/:uid', changeUserRole)
 
 router.get('/auth/github', githubAuth)
 router.get('/auth/github/callback', githubCallback)
