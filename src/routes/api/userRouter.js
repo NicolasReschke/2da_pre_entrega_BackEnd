@@ -6,7 +6,7 @@ import {
     sendMessageUser,
     loginUserHandler,
     registerUserHandler,
-    forgotPassword,
+    sendPasswordResetLink,
     resetPassword,
     changeUserRole,
     githubAuth,
@@ -25,7 +25,7 @@ router.post('/chat', sendMessageUser)
 
 router.post('/login', loginUserHandler)
 router.post('/register', registerUserHandler)
-router.post('/forgot-password', forgotPassword)
+router.post('/forgot-password', sendPasswordResetLink)
 router.post('/reset-password/:token', resetPassword)
 router.put('/api/users/premium/:uid', changeUserRole)
 
