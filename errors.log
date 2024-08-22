@@ -110,3 +110,11 @@
 2024-08-12 16:43:08 [31merror[39m: [31mIntento de agregar al carrito un producto propio por nicolas.reschke@hotmail.com[39m
 2024-08-12 20:28:11 [31merror[39m: [31mIntento de agregar al carrito un producto propio por nicolas.reschke@hotmail.com[39m
 2024-08-12 20:28:16 [31merror[39m: [31mIntento de agregar al carrito un producto propio por nicolas.reschke@hotmail.com[39m
+2024-08-13 22:46:39 [31merror[39m: [31mIntento de agregar al carrito un producto propio por nicolas.reschke@hotmail.com[39m
+2024-08-21 00:33:28 [31merror[39m: [31mIllegal arguments: string, undefined[39m
+2024-08-21 00:33:35 [31merror[39m: [31mIllegal arguments: string, undefined[39m
+2024-08-21 00:33:49 [31merror[39m: [31mIllegal arguments: string, undefined[39m
+2024-08-21 00:42:04 [31merror[39m: [31mIllegal arguments: string, undefined[39m
+2024-08-21 01:03:09 [31merror[39m: [31mIntento de agregar al carrito un producto propio por touka.reschke@gmail.com[39m
+2024-08-21 23:30:43 [31merror[39m: [31mError al agregar producto ID_DEL_PRODUCTO al carrito ID_DEL_CARRITO: Cast to ObjectId failed for value "ID_DEL_PRODUCTO" (type string) at path "_id" for model "Product"[39m
+2024-08-21 23:35:47 [31merror[39m: [31mError al agregar producto ID_DEL_PRODUCTO al carrito ID_DEL_CARRITO: Cast to ObjectId failed for value "ID_DEL_PRODUCTO" (type string) at path "_id" for model "Product"[39m

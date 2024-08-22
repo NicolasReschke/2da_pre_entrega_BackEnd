@@ -7,8 +7,7 @@ import {
     deleteUser as deleteUserService,
     logoutUser as logoutUserService,
     sendMessageUser as sendMessageUserService,
-    registerUser,
-    /* initializeAdmins */
+    registerUser as registerUserService
 } from '../services/userService.js'
 import User from '../models/userModel.js'
 import transporter from '../config/emailConfigs.js'
@@ -70,12 +69,46 @@ export const registerUserHandler = async (req, res) => {
     const userData = { first_name, last_name, email, age, password, password2 }
 
     try {
-        await registerUser(userData)
+        await registerUserService(userData)
         return res.redirect('/login?success=Usuario registrado correctamente. Por favor, inicie sesión.')
     } catch (error) {
         console.error('Error al registrar el usuario:', error)
         return res.redirect('/register?error=' + encodeURIComponent(error.message))
     }
+}
+
+export const changeUserRole = async (req, res) => {
+    try {
+        const userId = req.params.uid
+        const user = await User.findById(userId)
+
+        if (!user) {
+            return res.status(404).json({ error: 'Usuario no encontrado' })
+        }
+
+        user.role = user.role === 'user' ? 'premium' : 'user'
+        await user.save()
+
+        res.status(200).json({ message: 'Rol actualizado', role: user.role })
+    } catch (error) {
+        res.status(500).json({ error: 'Error interno del servidor' })
+    }
+}
+
+export const githubAuth = passport.authenticate('github', { scope: ['user:email'] })
+export const githubCallback = (req, res, next) => {
+    passport.authenticate('github', {
+        failureRedirect: '/login?error=Autenticación con GitHub fallida.',
+        successRedirect: '/products'
+    })(req, res, next)
+}
+
+export const googleAuth = passport.authenticate('google', { scope: ['email'] })
+export const googleCallback = (req, res, next) => {
+    passport.authenticate('google', {
+        failureRedirect: '/login?error=Autenticación con Google fallida.',
+        successRedirect: '/products'
+    })(req, res, next)
 }
 
 export const loginUserHandler = (req, res, next) => {
@@ -157,40 +190,6 @@ export const resetPassword = async (req, res) => {
         console.error('Error al restablecer la contraseña:', error)
         res.status(500).send('Error al restablecer la contraseña')
     }
-}
-
-export const changeUserRole = async (req, res) => {
-    try {
-        const userId = req.params.uid
-        const user = await User.findById(userId)
-
-        if (!user) {
-            return res.status(404).json({ error: 'Usuario no encontrado' })
-        }
-
-        user.role = user.role === 'user' ? 'premium' : 'user'
-        await user.save()
-
-        res.status(200).json({ message: 'Rol actualizado', role: user.role })
-    } catch (error) {
-        res.status(500).json({ error: 'Error interno del servidor' })
-    }
-}
-
-export const githubAuth = passport.authenticate('github', { scope: ['user:email'] })
-export const githubCallback = (req, res, next) => {
-    passport.authenticate('github', {
-        failureRedirect: '/login?error=Autenticación con GitHub fallida.',
-        successRedirect: '/products'
-    })(req, res, next)
-}
-
-export const googleAuth = passport.authenticate('google', { scope: ['email'] })
-export const googleCallback = (req, res, next) => {
-    passport.authenticate('google', {
-        failureRedirect: '/login?error=Autenticación con Google fallida.',
-        successRedirect: '/products'
-    })(req, res, next)
 }
 
 /* export const initializeAdminsHandler = async () => {

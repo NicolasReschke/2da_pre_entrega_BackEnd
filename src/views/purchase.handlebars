@@ -59,7 +59,7 @@
                         text: data.message,
                         footer: `Código de compra: ${data.ticket.code}`
                     }).then(() => {
-                        window.location.href = '/carts/{{cart._id}}'
+                        window.location.href = '/purchases'
                     })
                 } else {
                     let productDetails = ''
