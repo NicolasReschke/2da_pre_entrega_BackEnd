@@ -22,20 +22,3 @@ export const sendPurchaseEmail = async (user, purchasedProductsEmail, ticketCode
         console.error('Error enviando el correo de compra:', error)
     }
 }
-
-/* export const sendPasswordResetEmail = async (user, resetToken) => {
-    const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${resetToken}`
-    const mailOptions = {
-        from: process.env.EMAIL_USER_NODEMAILER,
-        to: user.email,
-        subject: 'Recuperación de contraseña',
-        text: `Hola ${user.first_name},\n\nHaz clic en el siguiente enlace para restablecer tu contraseña:\n${resetUrl}\n\nSi no solicitaste este cambio, por favor ignora este correo.\n\nSaludos,\nTu equipo de eCommerce`,
-    }
-
-    try {
-        await transporter.sendMail(mailOptions)
-        console.log('Correo de recuperación de contraseña enviado')
-    } catch (error) {
-        console.error('Error enviando el correo de recuperación de contraseña:', error)
-    }
-} */

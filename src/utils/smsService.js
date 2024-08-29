@@ -1,4 +1,4 @@
-import twilio from 'twilio'
+/* import twilio from 'twilio'
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -20,4 +20,4 @@ export const sendSMS = async (to, body) => {
         console.error('Error sending message:', error)
         throw error
     }
-}
+} */

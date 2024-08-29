@@ -6,7 +6,7 @@ import {
     clearCartProducts as clearCartProductsService,
     purchaseCart,
 } from '../services/cartService.js'
-import { sendSMS } from '../utils/smsService.js'
+/* import { sendSMS } from '../utils/smsService.js' */
 import logger from '../utils/logger.js'
 import Product from '../models/productModel.js'
 
@@ -115,8 +115,8 @@ export const deleteAllProductsFromCart = async (req, res) => {
 export const getPurchase = async (req, res) => {
     const { cid } = req.params
     const user = req.user
-    const { method } = req.query
-    const { phoneNumber } = req.body
+    /* const { method } = req.query
+    const { phoneNumber } = req.body */
 
     try {
         const { ticket, unavailableProducts } = await purchaseCart(cid, user)
@@ -125,14 +125,14 @@ export const getPurchase = async (req, res) => {
             return res.status(400).json({ status: 'error', message: 'No se pudo completar la compra.', unavailableProducts })
         }
 
-        if (method === 'sms' && phoneNumber) {
+        /* if (method === 'sms' && phoneNumber) {
             const message = `Tu compra ha sido confirmada. Código de compra: ${ticket.code}, Monto: $${ticket.amount}`
             try {
                 await sendSMS(phoneNumber, message)
             } catch (error) {
                 console.error('Error enviando el SMS:', error)
             }
-        }
+        } */
 
         res.json({ status: 'success', message: 'Compra realizada', ticket })
     } catch (err) {

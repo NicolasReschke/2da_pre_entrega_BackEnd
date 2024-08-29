@@ -45,3 +45,7 @@ export const initializeMockProducts = async () => {
     await MockingProduct.insertMany(products)
     console.log('Mock products generated')
 }
+
+export const addProduct = async (name, description, price, stock, status, category, thumbnail) => {
+    return await productRepository.addProduct(name, description, price, stock, status, category, thumbnail)
+}

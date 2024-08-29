@@ -2,6 +2,7 @@ import express from 'express'
 import {
     getProducts,
     getCategories,
+    addProduct,
     getMockingProducts,
     regenerateMockingProducts,
     createProduct
@@ -11,6 +12,7 @@ const router = express.Router()
 
 router.get('/', getProducts)
 router.get('/categories', getCategories)
+router.post('/create', addProduct)
 
 router.get('/mockingProducts', getMockingProducts)
 router.post('/mockingProducts/regenerate', regenerateMockingProducts)

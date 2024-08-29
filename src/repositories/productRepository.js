@@ -23,6 +23,10 @@ export default {
         return new ProductDTO(newProduct)
     },
 
+    addProduct: async (name, description, price, stock, status, category, thumbnail) => {
+        return await Product.create({ name, description, price, stock, status, category, thumbnail })
+    },
+
     updateProduct: async (productData) => {
         const updatedProduct = await productDao.updateProduct(productData)
         return new ProductDTO(updatedProduct)
