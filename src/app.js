@@ -102,13 +102,17 @@ const PORT = process.env.PORT
 const LOGGER = process.env.LOGGER_ENV
 
 server.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}/login`)
     if (LOGGER === 'production') {
+        console.log(`Server is in production mode`)
+        console.log(`Server is running on http://localhost:${PORT}/login`)
         console.log('Logger is in production mode, running on http://localhost:8080/loggertestview')
+        console.log('Swagger is running on http://localhost:8080/api-docs')
     } else {
-        console.log('Logger is in development mode')
+        console.log(`Server is in development mode`)
+        console.log(`Server is running on https://2dapreentregabackend-production.up.railway.app`)
+        console.log('Logger is in development mode, running on https://2dapreentregabackend-production.up.railway.app/loggertestview')
+        console.log('Swagger is running on https://2dapreentregabackend-production.up.railway.app/api-docs')
     }
-    console.log('Swagger is running on http://localhost:8080/api-docs')
 })
 
 app.use((err, req, res, next) => {
