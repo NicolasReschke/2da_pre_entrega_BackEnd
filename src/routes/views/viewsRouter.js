@@ -1,5 +1,5 @@
 import express from 'express'
-import { authorizeRoles } from '../../middlewares/authMiddleware.js'
+import { authorizeRoles, checkUser } from '../../middlewares/authMiddleware.js'
 import User from '../../models/userModel.js'
 import Cart from '../../models/cartModel.js'
 import Product from '../../models/productModel.js'
@@ -25,42 +25,45 @@ router.get('/', async (req, res) => {
     })
 })
 
-router.get('/products', authorizeRoles(['user', 'admin', 'premium']), async (req, res) => {
+router.get('/products', checkUser, async (req, res) => {
     try {
-        const userId = req.user._id
-        const user = await User.findById(userId).populate('cart').lean()
+        const products = await Product.find().lean()
 
-        if (!user) {
-            return res.status(404).render('products', { error: 'Usuario no encontrado' })
+        if (res.locals.user) {
+            const userId = res.locals.user._id
+            const user = await User.findById(userId).populate('cart').lean()
+
+            if (!user || !user.cart) {
+                return res.status(404).render('products', { products, error: 'No se encontró el carrito del usuario' })
+            }
+
+            const cartId = user.cart._id
+            const cart = await getPopulatedCart(cartId)
+
+            return res.render('products', {
+                products,
+                cartId,
+                user: res.locals.user,
+                style: 'style.css',
+            })
+        } else {
+            res.render('products', {
+                products,
+                style: 'style.css',
+            })
         }
-
-        if (!user.cart) {
-            return res.status(404).render('products', { error: 'No se encontró el carrito del usuario' })
-        }
-
-        const cartId = user.cart._id
-        const cart = await getPopulatedCart(cartId)
-
-        res.render('products', {
-            cartId: cartId,
-            user: res.locals.user,
-            style: 'style.css',
-        })
     } catch (error) {
-        console.error('Error al obtener el carrito:', error)
+        console.error('Error al obtener los productos:', error)
         res.status(500).render('products', { error: error.message })
     }
 })
 
-router.get('/products/:pid', authorizeRoles(['user', 'admin', 'premium']), async (req, res) => {
+
+router.get('/products/:pid', checkUser, async (req, res) => {
     try {
-        const userId = req.user._id
-        const user = await User.findById(userId).populate('cart').lean()
-
-        const cartId = user.cart._id
-
         const productId = req.params.pid
-        const product = await Product.findById(productId)
+        const product = await Product.findById(productId).lean()
+
         const options = { 
             weekday: 'long', 
             year: 'numeric', 
@@ -75,7 +78,7 @@ router.get('/products/:pid', authorizeRoles(['user', 'admin', 'premium']), async
 
         res.render('viewDetailProduct', {
             product,
-            cartId: cartId,
+            cartId: res.locals.cart ? res.locals.cart._id : null,
             style: 'style.css',
             user: res.locals.user
         })
@@ -85,13 +88,8 @@ router.get('/products/:pid', authorizeRoles(['user', 'admin', 'premium']), async
     }
 })
 
-router.get('/products/category/:category', authorizeRoles(['user', 'premium']), async (req, res) => {
+router.get('/products/category/:category', checkUser, async (req, res) => {
     try {
-        const userId = req.user._id
-        const user = await User.findById(userId).populate('cart').lean()
-        
-        const cartId = user.cart._id
-
         const category = req.params.category
 
         const products = await Product.find({ category }).lean()
@@ -99,7 +97,7 @@ router.get('/products/category/:category', authorizeRoles(['user', 'premium']), 
         res.render('productsByCategory', {
             category,
             products,
-            cartId,
+            cartId: res.locals.cart ? res.locals.cart._id : null,
             user: res.locals.user,
             style: 'style.css',
         })
@@ -247,9 +245,7 @@ router.post('/adminAddProduct', authorizeRoles(['premium', 'admin']), async (req
             return res.status(400).json({ error: 'Faltan parámetros' })
         }
 
-        console.log(req.user.role)
         let owner = req.user.role === 'admin' ? 'admin' : req.user.email
-        console.log(owner)
 
         let newProduct = await Product.create({
             name,

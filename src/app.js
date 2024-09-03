@@ -37,11 +37,11 @@ app.use(session({
     saveUninitialized: false,
     store: MongoStore.create({
         mongoUrl: process.env.MONGODB_URL,
-        ttl: 30 * 60 * 1000 //30min //7 * 24 * 60 * 60 * 1000 // 7 dias
+        ttl: 30 * 60 * 1000 //=30min -------> 7 * 24 * 60 * 60 * 1000 = 7 dias
     }),
     cookie: { 
         secure: false,
-        maxAge: 30 * 60 * 1000 //30min //7 * 24 * 60 * 60 * 1000 // 7 dias
+        maxAge: 30 * 60 * 1000 //=30min -------> 7 * 24 * 60 * 60 * 1000 = 7 dias
     }
 }))
 
