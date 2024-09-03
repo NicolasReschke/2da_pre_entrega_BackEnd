@@ -37,7 +37,6 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, passwor
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID_DEVELOPMENT,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    /* callbackURL: callbackURL */
     /* callbackURL: "http://localhost:8080/auth/github/callback" */
     callbackURL: "https://2dapreentregabackend-production.up.railway.app/auth/github/callback"
 }, async (accessToken, refreshToken, profile, done) => {
