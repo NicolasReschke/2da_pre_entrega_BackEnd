@@ -1,7 +1,7 @@
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
 import { Strategy as GitHubStrategy } from 'passport-github2'
-import { Strategy as GoogleStrategy } from 'passport-google-oauth20'
+/* import { Strategy as GoogleStrategy } from 'passport-google-oauth20' */
 import bcrypt from 'bcryptjs'
 import dotenv from 'dotenv'
 
@@ -83,7 +83,7 @@ passport.use(new GitHubStrategy({
     }
 }))
 
-passport.use(new GoogleStrategy({
+/* passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: "http://localhost:8080/auth/google/callback"
@@ -126,7 +126,7 @@ passport.use(new GoogleStrategy({
     } catch (err) {
         return done(err)
     }
-}))
+})) */
 
 passport.serializeUser((user, done) => {
     done(null, user.id)
