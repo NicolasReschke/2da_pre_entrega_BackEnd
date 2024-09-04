@@ -26,15 +26,15 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, passwor
     }
 }))
 
-const callbackURL = process.env.LOGGER_ENV === 'production'
+const callbackURL = process.env.LOGGER_ENV !== 'production'
     ? "http://localhost:8080/auth/github/callback"
     : "https://2dapreentregabackend-production.up.railway.app/auth/github/callback"
 
-const CLIENT_ID = process.env.LOGGER_ENV === 'production'
+const CLIENT_ID = process.env.LOGGER_ENV !== 'production'
     ? process.env.GITHUB_CLIENT_ID_PRODUCTION
     : process.env.GITHUB_CLIENT_ID_DEVELOPMENT
 
-const clientSecret = process.env.LOGGER_ENV === 'production'
+const clientSecret = process.env.LOGGER_ENV !== 'production'
     ? process.env.GITHUB_CLIENT_SECRET_PRODUCTION
     : process.env.GITHUB_CLIENT_SECRET_DEVELOPMENT
 
