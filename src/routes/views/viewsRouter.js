@@ -58,7 +58,6 @@ router.get('/products', checkUser, async (req, res) => {
     }
 })
 
-
 router.get('/products/:pid', checkUser, async (req, res) => {
     try {
         const productId = req.params.pid

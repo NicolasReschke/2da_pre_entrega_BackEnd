@@ -147,3 +147,4 @@
 2024-09-03 01:54:45 [31merror[39m: [31mThis is a error log message[39m
 2024-09-03 01:54:47 [35mfatal[39m: [35mThis is a fatal log message[39m
 2024-09-03 22:56:44 [31merror[39m: [31mUnknown authentication strategy "google"[39m
+2024-09-05 18:25:06 [31merror[39m: [31mIntento de agregar al carrito un producto propio por cliente1@cliente[39m
