@@ -17,7 +17,10 @@ const JWT_SECRET = process.env.JWT_SECRET
 
 export const logoutUser = async (req, res) => {
     try {
-        req.user.last_connection = new Date()
+        const user = req.user
+        user.last_connection = new Date()
+        await user.save()
+        
         await logoutUserService(req)
         res.redirect('/?success=Cierre de sesión exitoso.')
     } catch (error) {

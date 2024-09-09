@@ -94,20 +94,3 @@ export const registerUser = async (userData) => {
         throw new Error('Error al registrar el usuario: ' + error.message)
     }
 }
-
-/* export const initializeAdmins = async () => {
-    const adminEmail = process.env.ADMIN_EMAIL
-    const adminPassword = process.env.ADMIN_PASSWORD
-
-    const admin = await userRepository.getUserByEmail(adminEmail)
-
-    if (!admin) {
-        await userRepository.createAdmin({
-            first_name: 'Admin',
-            email: adminEmail,
-            password: adminPassword,
-            role: 'admin'
-        })
-        console.log('Admin user created.')
-    }
-} */
