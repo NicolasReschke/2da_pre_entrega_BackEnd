@@ -16,15 +16,24 @@
                 </ul>
             </div>
             <div class="card-body">
-                {{#if (equals user.role "user")}}
+                {{!-- {{#if (equals user.role "user")}}
                     <button class="btn btn-warning change-role">Actualizar a Usuario Premium</button>
                 {{else}}
                     <button class="btn btn-warning change-role">Actualizar a Usuario común</button>
+                {{/if}} --}}
+                {{#if (equals user.role "user")}}
+                    <a href="/profile/{{user._id}}/documents">
+                        <button class="btn btn-warning">Subir documentos para ser Premium</button>
+                    </a>
+                {{else}}
+                    <a href="/profile/{{user._id}}/documents">
+                        <button class="btn btn-warning">Actualizar mis documentos</button>
+                    </a>
                 {{/if}}
                 <br><br>
-                <a href="/forgot-password"><button class="btn btn-info">Cambiar contraseña</button></a>
-                <br><br>
                 <a href="/profile/{{user._id}}"><button class="btn btn-success">Editar mi perfil</button></a>
+                <br><br>
+                <a href="/forgot-password"><button class="btn btn-info">Cambiar contraseña</button></a>
                 <br><br>
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">

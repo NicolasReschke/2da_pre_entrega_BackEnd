@@ -15,7 +15,7 @@ export const updateProfile = async (userId, profileData, file) => {
         user.age = profileData.age || user.age
 
         if (file) {
-            user.profile_image = `/uploads/${file.filename}`
+            user.profile_image = `/uploads/profiles/${file.filename}`
         }
 
         await userRepository.updateUser(user)

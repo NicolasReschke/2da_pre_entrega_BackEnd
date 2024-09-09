@@ -148,3 +148,14 @@
 2024-09-03 01:54:47 [35mfatal[39m: [35mThis is a fatal log message[39m
 2024-09-03 22:56:44 [31merror[39m: [31mUnknown authentication strategy "google"[39m
 2024-09-05 18:25:06 [31merror[39m: [31mIntento de agregar al carrito un producto propio por cliente1@cliente[39m
+2024-09-08 17:30:18 [31merror[39m: [31mENOENT: no such file or directory, open 'C:\Users\4quiles\OneDrive\Escritorio\2da_pre_entrega-BackEnd\src\public\uploads\documents\1725827418019.pdf'[39m
+2024-09-08 17:34:23 [31merror[39m: [31mError: Solo se permiten archivos JPEG, JPG, PNG o PDF![39m
+2024-09-08 17:34:40 [31merror[39m: [31mENOENT: no such file or directory, open 'C:\Users\4quiles\OneDrive\Escritorio\2da_pre_entrega-BackEnd\src\public\uploads\profiles\1725827680579.jpg'[39m
+2024-09-08 17:44:25 [31merror[39m: [31mENOENT: no such file or directory, open 'C:\Users\4quiles\OneDrive\Escritorio\2da_pre_entrega-BackEnd\src\public\uploads\profiles\1725828265834.png'[39m
+2024-09-08 18:21:38 [31merror[39m: [31mFailed to lookup view "updateDocumentsProfile" in views directory "C:\Users\4quiles\OneDrive\Escritorio\2da_pre_entrega-BackEnd\src\views"[39m
+2024-09-08 18:58:59 [31merror[39m: [31mUnexpected field[39m
+2024-09-08 19:05:36 [31merror[39m: [31mUnexpected field[39m
+2024-09-08 19:07:34 [31merror[39m: [31mUnexpected field[39m
+2024-09-08 19:11:11 [31merror[39m: [31mUnexpected field[39m
+2024-09-08 20:36:21 [31merror[39m: [31mError: Solo se permiten archivos JPEG, JPG, PNG o PDF![39m
+2024-09-08 20:56:49 [31merror[39m: [31mError: Solo se permiten archivos JPEG, JPG, PNG o PDF![39m

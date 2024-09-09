@@ -151,6 +151,13 @@ router.get('/profile/:uid', authorizeRoles(['user', 'premium']), async (req, res
     })
 })
 
+router.get('/profile/:uid/documents', authorizeRoles(['user', 'premium']), async (req, res) => {
+    res.render('updateDocuments', {
+        style: 'style.css',
+        user: res.locals.user
+    })
+})
+
 router.get('/:cid/purchase', authorizeRoles(['user', 'premium']), async (req, res) => {
     try {
         const cartId = req.params.cid

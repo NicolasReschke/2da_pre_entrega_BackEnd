@@ -39,6 +39,59 @@ export const updateProfile = async (req, res) => {
     }
 }
 
+export const updateDocumentsProfile = async (req, res) => {
+    const userId = req.params.uid
+    const files = req.files
+
+    try {
+        const user = await User.findById(userId)
+        if (!user) {
+            return res.status(404).send('Usuario no encontrado.')
+        }
+
+        if (!files || Object.keys(files).length === 0) {
+            return res.status(400).send('No se han subido documentos.')
+        }
+
+        const documentTypes = {
+            identification: 'documents[identification]',
+            proofOfAddress: 'documents[proofOfAddress]',
+            accountStatement: 'documents[accountStatement]'
+        }
+
+        for (const [docType, fieldName] of Object.entries(documentTypes)) {
+            if (files[fieldName] && files[fieldName][0]) {
+                const documentPath = `/uploads/documents/${files[fieldName][0].filename}`
+                const existingDocIndex = user.documents.findIndex(doc => doc.name === docType)
+                if (existingDocIndex >= 0) {
+                    user.documents[existingDocIndex] = { name: docType, reference: documentPath }
+                } else {
+                    user.documents.push({ name: docType, reference: documentPath })
+                }
+            }
+        }
+
+        const requiredDocuments = ['identification', 'proofOfAddress', 'accountStatement']
+        const userDocuments = user.documents.map(doc => doc.name)
+
+        const hasAllDocuments = requiredDocuments.every(doc => userDocuments.includes(doc))
+        if (hasAllDocuments) {
+            user.role = 'premium'
+        }
+
+        await user.save()
+
+        if (hasAllDocuments) {
+            res.redirect('/profile?success=Documentos actualizados y usuario promovido a premium correctamente.')
+        } else {
+            res.redirect('/profile?success=Documentos actualizados. Complete la carga de documentos para ser promovido a premium.')
+        }
+    } catch (error) {
+        console.error('Error al actualizar los documentos:', error)
+        res.status(500).send('Error al actualizar los documentos: ' + error.message)
+    }
+}
+
 export const deleteUser = async (req, res) => {
     const userId = req.params.uid
 

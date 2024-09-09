@@ -2,6 +2,7 @@ import express from 'express'
 import {
     logoutUser,
     updateProfile,
+    updateDocumentsProfile,
     deleteUser,
     sendMessageUser,
     loginUserHandler,
@@ -19,7 +20,12 @@ import upload from '../../middlewares/uploadMiddleware.js'
 const router = express.Router()
 
 router.post('/logout', logoutUser)
-router.post('/profile/:uid', upload.single('profileImage'), updateProfile)
+router.post('/profile/:uid', upload.single('profile'), updateProfile)
+router.post('/profile/:uid/documents', upload.fields([
+    { name: 'documents[identification]', maxCount: 1 },
+    { name: 'documents[proofOfAddress]', maxCount: 1 },
+    { name: 'documents[accountStatement]', maxCount: 1 }
+]), updateDocumentsProfile)
 router.delete('/profile/:uid', deleteUser)
 router.post('/chat', sendMessageUser)
 
