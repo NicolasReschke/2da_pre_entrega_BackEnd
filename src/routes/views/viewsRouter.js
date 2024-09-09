@@ -313,6 +313,19 @@ router.get('/adminDeleteProduct/:pid', authorizeRoles(['premium', 'admin']), asy
     }
 })
 
+router.get('/adminViewAllUsers', authorizeRoles(['admin']), async (req, res) => {
+    try {
+        const users = await User.find().lean()
+        res.render('adminViewAllUsers', {
+            users,
+            style: 'style.css'
+        })
+    } catch (error) {
+        console.error('Error al obtener los usuarios:', error)
+        res.status(500).send('Error al obtener los usuarios')
+    }
+})
+
 router.get('/login', async (req, res) => {
     res.render('login', {
         style: 'style.css'

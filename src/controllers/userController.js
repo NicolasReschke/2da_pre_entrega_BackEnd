@@ -17,6 +17,7 @@ const JWT_SECRET = process.env.JWT_SECRET
 
 export const logoutUser = async (req, res) => {
     try {
+        req.user.last_connection = new Date()
         await logoutUserService(req)
         res.redirect('/?success=Cierre de sesión exitoso.')
     } catch (error) {
@@ -150,32 +151,49 @@ export const changeUserRole = async (req, res) => {
 
 export const githubAuth = passport.authenticate('github', { scope: ['user:email'] })
 export const githubCallback = (req, res, next) => {
-    passport.authenticate('github', {
-        failureRedirect: '/login?error=Autenticación con GitHub fallida.',
-        successRedirect: '/products'
+    passport.authenticate('github', async (err, user, info) => {
+        if (err) return next(err)
+        if (!user) return res.redirect('/login?error=Autenticación con GitHub fallida.')
+
+        req.logIn(user, async (err) => {
+            if (err) return next(err)
+
+            user.last_connection = new Date()
+            await user.save()
+
+            return res.redirect('/products')
+        })
     })(req, res, next)
 }
 
 export const googleAuth = passport.authenticate('google', { scope: ['email'] })
 export const googleCallback = (req, res, next) => {
-    passport.authenticate('google', {
-        failureRedirect: '/login?error=Autenticación con Google fallida.',
-        successRedirect: '/products'
+    passport.authenticate('google', async (err, user, info) => {
+        if (err) return next(err)
+        if (!user) return res.redirect('/login?error=Autenticación con Google fallida.')
+
+        req.logIn(user, async (err) => {
+            if (err) return next(err)
+
+            user.last_connection = new Date()
+            await user.save()
+
+            return res.redirect('/products')
+        })
     })(req, res, next)
 }
 
 export const loginUserHandler = (req, res, next) => {
     passport.authenticate('local', async (err, user, info) => {
-        if (err) {
-            return next(err)
-        }
-        if (!user) {
-            return res.redirect('/login?error=' + encodeURIComponent(info.message))
-        }
+        if (err) return next(err)
+        if (!user) return res.redirect('/login?error=' + encodeURIComponent(info.message))
+
         req.logIn(user, async (err) => {
-            if (err) {
-                return next(err)
-            }
+            if (err) return next(err)
+
+            user.last_connection = new Date()
+            await user.save()
+
             if (user.role === 'admin') {
                 return res.redirect('/adminDashboard')
             } else {
@@ -244,7 +262,3 @@ export const resetPassword = async (req, res) => {
         res.status(500).send('Error al restablecer la contraseña')
     }
 }
-
-/* export const initializeAdminsHandler = async () => {
-    await initializeAdmins()
-} */
