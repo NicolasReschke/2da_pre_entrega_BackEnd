@@ -42,7 +42,7 @@
                     <select id="limit" class="form-select" onchange="fetchProducts()">
                         <option value="3">3</option>
                         <option value="6">6</option>
-                        <option value="10" selected>10</option>
+                        <option value="12" selected>12</option>
                         <option value="20">20</option>
                     </select>
                 </div>
@@ -264,7 +264,7 @@
                                 }
                             })
                         } else {
-                            Swal.fire('Error', 'No se pudo agregar el producto al carrito.', 'error')
+                            Swal.fire('Error', 'No puedes agregar un producto propio al carrito.', 'error')
                         }
                     }
                 } catch (error) {
