@@ -166,3 +166,8 @@
 2024-09-21 15:49:03 [31merror[39m: [31mIntento de agregar al carrito un producto propio por nico_1787@hotmail.com[39m
 2024-09-21 15:50:05 [31merror[39m: [31mIntento de agregar al carrito un producto propio por nico_1787@hotmail.com[39m
 2024-09-21 19:40:50 [31merror[39m: [31mFailed to lookup view "error" in views directory "C:\Users\4quiles\OneDrive\Escritorio\2da_pre_entrega-BackEnd\src\views"[39m
+2024-09-22 05:06:03 [31merror[39m: [31mParse error on line 180:[39m
+[31m...   {{#if (different ${product.owner} "ad[39m
+[31m-----------------------^[39m
+[31mExpecting 'CLOSE_RAW_BLOCK', 'CLOSE', 'CLOSE_UNESCAPED', 'OPEN_SEXPR', 'CLOSE_SEXPR', 'ID', 'OPEN_BLOCK_PARAMS', 'STRING', 'NUMBER', 'BOOLEAN', 'UNDEFINED', 'NULL', 'DATA', 'SEP', got 'INVALID'[39m
+2024-09-22 05:46:51 [31merror[39m: [31mIntento de agregar al carrito un producto propio por nico_1787@hotmail.com[39m

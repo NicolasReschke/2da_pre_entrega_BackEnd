@@ -16,14 +16,21 @@
 
     <form method="GET" action="/adminViewAllProducts">
         <div class="row mb-3">
-            <div class="col">
-                <input type="text" name="owner" placeholder="Filtrar por propietario" class="form-control">
+            {{#if (equals user.role "admin")}}
+                <div class="col" style="max-width: 450px;">
+                    <input type="text" name="owner" placeholder="Filtrar por propietario" class="form-control">
+                </div>
+            {{/if}}
+            <div class="col" style="max-width: 250px;">
+                <input type="number" name="stock" placeholder="Stock igual o menor a:" class="form-control">
             </div>
-            <div class="col">
-                <input type="number" name="stock" placeholder="Filtrar por stock mínimo" class="form-control">
+            <div>
+                <button type="submit" class="btn btn-primary" style="margin-right: 30px;">Filtrar</button>
             </div>
-            <div class="col">
-                <button type="submit" class="btn btn-primary">Filtrar</button>
+            <div>
+                <a href="/adminViewAllProducts" class="btn btn-primary">
+                        Limpiar filtros
+                    </a>
             </div>
         </div>
     </form>

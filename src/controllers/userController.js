@@ -185,7 +185,9 @@ export const deleteInactiveUsers = async (req, res) => {
                 await user.save()
                 await sendEmail(user.email, 'Cambio de rol por inactividad', 'Tu cuenta ha sido degradada a usuario común. Inicia sesión para evitar perder tu cuenta.')
             } else if (user.role === 'user') {
-                await Cart.deleteOne({ userId: user._id })
+                console.log(user.cart);
+                console.log(user.cart._id);
+                await Cart.deleteOne({ userId: user.cart._id })
                 await Product.updateMany({ owner: user.email }, { stock: 0 })
                 await sendEmail(user.email, 'Cuenta eliminada por inactividad', 'Tu cuenta ha sido eliminada.')
                 await User.deleteOne({ _id: user._id })
