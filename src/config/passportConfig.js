@@ -26,12 +26,12 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, passwor
     }
 }))
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'development'
 
 passport.use(new GitHubStrategy({
-    clientID: isProduction ? process.env.GITHUB_CLIENT_ID_PRODUCTION : process.env.GITHUB_CLIENT_ID_DEVELOPMENT,
-    clientSecret: isProduction ? process.env.GITHUB_CLIENT_SECRET_PRODUCTION : process.env.GITHUB_CLIENT_SECRET_DEVELOPMENT,
-    callbackURL: isProduction ? process.env.GITHUB_CALLBACK_URL_PRODUCTION : process.env.GITHUB_CALLBACK_URL_DEVELOPMENT
+    clientID: isProduction ? process.env.GITHUB_CLIENT_ID_DEVELOPMENT : process.env.GITHUB_CLIENT_ID_PRODUCTION,
+    clientSecret: isProduction ? process.env.GITHUB_CLIENT_SECRET_DEVELOPMENT : process.env.GITHUB_CLIENT_SECRET_PRODUCTION,
+    callbackURL: isProduction ? process.env.GITHUB_CALLBACK_URL_DEVELOPMENT : process.env.GITHUB_CALLBACK_URL_PRODUCTION
 }, async (accessToken, refreshToken, profile, done) => {
     try {
         if (!profile.emails || !profile.emails[0].value) {
