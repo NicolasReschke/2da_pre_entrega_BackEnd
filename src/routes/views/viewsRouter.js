@@ -15,6 +15,18 @@ const router = express.Router()
 const getPopulatedCart = async (cartId) => {
     try {
         const cart = await Cart.findById(cartId).populate('products.product').lean()
+
+        if (!cart) {
+            throw new Error('Carrito no encontrado')
+        }
+
+        const validProducts = cart.products.filter(item => item.product !== null)
+
+        if (validProducts.length !== cart.products.length) {
+            cart.products = validProducts
+            await Cart.findByIdAndUpdate(cartId, { products: validProducts })
+        }
+
         return cart
     } catch (error) {
         throw new Error('Error al obtener el carrito')

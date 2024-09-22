@@ -99,10 +99,10 @@ app.use('/', viewsRouter)
 app.use('/', loggerRouter)
 
 const PORT = process.env.PORT
-const LOGGER = process.env.NODE_ENV
+const MODE = process.env.NODE_ENV
 
 server.listen(PORT, () => {
-    if (LOGGER === 'production') {
+    if (MODE === 'production') {
         console.log(`Server is in production mode`)
         console.log(`Server is running on http://localhost:${PORT}/login`)
         console.log('Logger is in production mode, running on http://localhost:8080/loggertestview')

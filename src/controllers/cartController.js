@@ -1,5 +1,4 @@
 import {
-    getCartById,
     addProductToCart as addProductToCartService,
     updateProductQuantity as updateProductQuantityService,
     removeProductFromCart as removeProductFromCartService,
@@ -11,17 +10,21 @@ import logger from '../utils/logger.js'
 import Product from '../models/productModel.js'
 import Cart from '../models/cartModel.js'
 
-export const getCart = async (req, res) => {
-    try {
-        const { cid } = req.params
-        const cart = await getCartById(cid)
-        if (!cart) {
-            return res.status(404).json({ status: 'error', message: 'Carrito no encontrado' })
-        }
-        res.json({ status: 'success', message: 'Carrito', data: cart })
-    } catch (err) {
-        res.status(500).json({ status: 'error', message: err.message })
+export const getCart = async (cartId) => {
+    const cart = await Cart.findById(cartId).populate('products.product')
+    
+    if (!cart) {
+        throw new Error('Carrito no encontrado')
     }
+
+    const validProducts = cart.products.filter(item => item.product !== null)
+
+    if (validProducts.length !== cart.products.length) {
+        logger.warn(`Algunos productos fueron eliminados del carrito ${cartId}`)
+        cart.products = validProducts
+        await cart.save()
+    }
+    return cart
 }
 
 export const updateCart = async (req, res) => {
