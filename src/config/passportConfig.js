@@ -26,7 +26,7 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, passwor
     }
 }))
 
-const isProduction = process.env.NODE_ENV === 'development'
+const isProduction = process.env.NODE_ENV_MODE === 'development'
 
 passport.use(new GitHubStrategy({
     clientID: isProduction ? process.env.GITHUB_CLIENT_ID_DEVELOPMENT_MODE : process.env.GITHUB_CLIENT_ID_PRODUCTION,
