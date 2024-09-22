@@ -26,21 +26,9 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, passwor
     }
 }))
 
-/* const callbackURL = process.env.LOGGER_ENV === 'production'
-    ? "http://localhost:8080/auth/github/callback"
-    : "https://2dapreentregabackend-production.up.railway.app/auth/github/callback"
-
-const CLIENT_ID = process.env.LOGGER_ENV === 'production'
-    ? process.env.GITHUB_CLIENT_ID_PRODUCTION
-    : process.env.GITHUB_CLIENT_ID_DEVELOPMENT
-
-const clientSecret = process.env.LOGGER_ENV === 'production'
-    ? process.env.GITHUB_CLIENT_SECRET_PRODUCTION
-    : process.env.GITHUB_CLIENT_SECRET_DEVELOPMENT */
-
 /* passport.use(new GitHubStrategy({
-    clientID: process.env.GITHUB_CLIENT_ID_DEVELOPMENT,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET_DEVELOPMENT,
+    clientID: process.env.GITHUB_CLIENT_ID_PRODUCTION,
+    clientSecret: process.env.GITHUB_CLIENT_SECRET_PRODUCTION,
     callbackURL: "http://localhost:8080/auth/github/callback"
     callbackURL: "https://2dapreentregabackend-production.up.railway.app/auth/github/callback" */
 passport.use(new GitHubStrategy({
@@ -51,8 +39,8 @@ passport.use(new GitHubStrategy({
         ? process.env.GITHUB_CLIENT_SECRET_PRODUCTION 
         : process.env.GITHUB_CLIENT_SECRET_DEVELOPMENT,
     callbackURL: process.env.NODE_ENV === 'production'
-        ? "https://2dapreentregabackend-production.up.railway.app/auth/github/callback"
-        : "http://localhost:8080/auth/github/callback"
+        ? "http://localhost:8080/auth/github/callback"
+        : "https://2dapreentregabackend-production.up.railway.app/auth/github/callback"
 }, async (accessToken, refreshToken, profile, done) => {
     try {
         if (!profile.emails || !profile.emails[0].value) {
