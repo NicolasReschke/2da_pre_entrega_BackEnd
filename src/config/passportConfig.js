@@ -110,7 +110,6 @@ passport.use(new GoogleStrategy({
             user.cart = newCart._id
 
             await user.save()
-            console.log(user)
         }
 
         return done(null, user)
