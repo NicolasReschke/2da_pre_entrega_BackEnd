@@ -174,7 +174,7 @@ router.get('/profile/:uid/documents', authorizeRoles(['user', 'premium']), async
     })
 })
 
-router.get('/:cid/purchase', authorizeRoles(['user', 'premium']), async (req, res) => {
+router.get('/carts/:cid/purchase', authorizeRoles(['user', 'premium']), async (req, res) => {
     try {
         const cartId = req.params.cid
         const cart = await getPopulatedCart(cartId)
@@ -187,6 +187,22 @@ router.get('/:cid/purchase', authorizeRoles(['user', 'premium']), async (req, re
     } catch (error) {
         console.error('Error al obtener el carrito:', error)
         res.status(500).render('purchase', { error: error.message })
+    }
+})
+
+router.get('/carts/:cid/payment-options', authorizeRoles(['user', 'premium']), async (req, res) => {
+    try {
+        const cartId = req.params.cid
+        const cart = await getPopulatedCart(cartId)
+
+        res.render('paymentOptions', {
+            cart,
+            style: 'style.css',
+            user: res.locals.user
+        })
+    } catch (error) {
+        console.error('Error al obtener el carrito:', error)
+        res.status(500).render('checkout', { error: error.message })
     }
 })
 
