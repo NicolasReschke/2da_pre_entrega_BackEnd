@@ -172,7 +172,7 @@ export const adminDeleteUser = async (req, res) => {
 export const deleteInactiveUsers = async (req, res) => {
     try {
         const now = new Date()
-        const thresholdDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000) // 7 días
+        const thresholdDate = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000) // 30 días
 
         const inactiveUsers = await User.find({ last_connection: { $lt: thresholdDate } })
 
