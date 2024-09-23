@@ -136,16 +136,22 @@
                     productsDiv.innerHTML = data.payload.map(product => `
                         <div class="col-md-4 mb-4">
                             <div class="card product-card">
-                                <img src="${product.thumbnail}" class="card-img-top img-fluid card-img-custom" alt="${product.description}">
-                                <a href="/products/${product._id}" class="btn btn-outline-info view-detail-btn">Ver Detalle</a>
+                                <a href="/products/${product._id}">
+                                    <img src="${product.thumbnail}" class="card-img-top img-fluid card-img-custom" alt="${product.description}">
+                                </a>
+                                <a href="/products/${product._id}" class="btn btn-outline-info view-detail-btn" style="width:200px">Ver Detalle</a>
                                 <div class="card-body">
                                     <h5 class="card-title">${product.name}</h5>
                                     <p class="card-text">${product.description}</p>
                                     <p class="card-text"><strong>Precio:</strong> $${product.price}</p>
                                     <p class="card-text"><strong>Stock:</strong> ${product.stock}</p>
-                                    ${product.stock === 0 ? 
-                                    `<button class="btn btn-danger" style="cursor: not-allowed" disabled>Sin stock</button>` : 
-                                    `<button class="add-cart btn btn-success" data-product-id="${product._id}" data-product-stock="${product.stock}">Agregar al carrito</button>`}
+                                    {{#if (different user.role "admin")}}
+                                        ${product.stock === 0 ?
+                                        `<button class="btn btn-danger" style="cursor: not-allowed" disabled>Sin stock</button>` : 
+                                        (product.stock !== 0 ? 
+                                            `<button class="add-cart btn btn-success" data-product-id="${product._id}" data-product-stock="${product.stock}">Agregar al carrito</button>` : 
+                                            ``)}
+                                    {{/if}}
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-muted">Publicado por: ${product.owner}</small><br>
