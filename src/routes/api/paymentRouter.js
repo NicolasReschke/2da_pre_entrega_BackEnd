@@ -37,7 +37,6 @@ router.post('/stripe', async (req, res) => {
             ? `http://localhost:8080/carts/${cartId}/purchase?status=error`
             : `https://2dapreentregabackend-production.up.railway.app/carts/${cartId}/purchase?status=error`
 
-        // Crear la sesión de Stripe
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: lineItems,

@@ -32,8 +32,8 @@
                     <label for="sort" class="form-label">Ordenar por precio</label>
                     <select id="sort" class="form-select" onchange="fetchProducts()">
                         <option value="">Ninguno</option>
-                        <option value="asc">De menor a mayor</option>
-                        <option value="desc">De mayor a menor</option>
+                        <option value="asc">Menor precio</option>
+                        <option value="desc">Mayor precio</option>
                     </select>
                 </div>
                 <br>
@@ -68,32 +68,6 @@
             </div>
         </div>
     </div>
-
-    <style>
-        .fixed-filters {
-            position: sticky;
-            top: 20px;
-            height: fit-content;
-            max-height: calc(100vh - 80px);
-            overflow-y: auto;
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        @media (max-width: 992px) {
-            .fixed-filters {
-                position: relative;
-                top: initial;
-                max-height: initial;
-                overflow-y: initial;
-                background-color: initial;
-                padding: initial;
-                box-shadow: initial;
-                border-radius: initial;
-            }
-        }
-    </style>
 
     <script>
         function formatDate(dateString) {
@@ -161,25 +135,21 @@
                     errorMessageDiv.style.display = 'none'
                     productsDiv.innerHTML = data.payload.map(product => `
                         <div class="col-md-4 mb-4">
-                            <div class="card">
-                                <img src="${product.thumbnail}" class="card-img-top img-fluid card-img-custom" style="height: 150px" alt="${product.description}"><a href="/products/${product._id}" class="btn btn-outline-info">Ver Detalle</a></img>
+                            <div class="card product-card">
+                                <img src="${product.thumbnail}" class="card-img-top img-fluid card-img-custom" alt="${product.description}">
+                                <a href="/products/${product._id}" class="btn btn-outline-info view-detail-btn">Ver Detalle</a>
                                 <div class="card-body">
                                     <h5 class="card-title">${product.name}</h5>
                                     <p class="card-text">${product.description}</p>
                                     <p class="card-text"><strong>Precio:</strong> $${product.price}</p>
                                     <p class="card-text"><strong>Stock:</strong> ${product.stock}</p>
-                                    {{#if (different user.role "admin")}}
-                                        ${product.stock === 0 ?
-                                        `<button class="btn btn-danger" style="cursor: not-allowed" disabled>Sin stock</button>` : 
-                                        (product.stock !== 0 ? 
-                                            `<button class="add-cart btn btn-success" data-product-id="${product._id}" data-product-stock="${product.stock}">Agregar al carrito</button>` : 
-                                            ``)}
-                                    {{/if}}
+                                    ${product.stock === 0 ? 
+                                    `<button class="btn btn-danger" style="cursor: not-allowed" disabled>Sin stock</button>` : 
+                                    `<button class="add-cart btn btn-success" data-product-id="${product._id}" data-product-stock="${product.stock}">Agregar al carrito</button>`}
                                 </div>
                                 <div class="card-footer">
-                                    <small class="text-muted">Publicado por: ${product.owner}</small>
-                                    <br>
-                                    <small class="text-muted">Updated: ${formatDate(product.updatedAt)}</small>
+                                    <small class="text-muted">Publicado por: ${product.owner}</small><br>
+                                    <small class="text-muted">Actualizado: ${formatDate(product.updatedAt)}</small>
                                 </div>
                             </div>
                         </div>
@@ -266,10 +236,98 @@
                         }
                     }
                 } catch (error) {
-                    Swal.fire('Error', 'Ocurrió un error al agregar el producto al carrito.', 'error')
+                    Swal.fire('Error', 'Debes loguearte para poder comprar', 'error')
                 }
             })
         })
     }
     </script>
+    <style>
+        .fixed-filters {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            max-height: calc(100vh - 80px);
+            overflow-y: auto;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        @media (max-width: 992px) {
+            .fixed-filters {
+                position: relative;
+                top: initial;
+                max-height: initial;
+                overflow-y: initial;
+                background-color: initial;
+                padding: initial;
+                box-shadow: initial;
+                border-radius: initial;
+            }
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+        .card-title {
+            margin-bottom: 10px;
+        }
+        .card-text {
+            margin-bottom: 15px;
+        }
+        .card-img-custom {
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid #ddd;
+        }
+        .card {
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .card-footer {
+            background-color: #f8f9fa;
+            font-size: 0.85rem;
+            text-align: right;
+        }
+        .product-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: scale(1.10);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .view-detail-btn {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            background-color: rgba(255, 255, 255, 0.7);
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+
+        .product-card:hover .view-detail-btn {
+            opacity: 1;
+        }
+
+        .card-img-custom {
+            height: 180px;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+    </style>
 </body>

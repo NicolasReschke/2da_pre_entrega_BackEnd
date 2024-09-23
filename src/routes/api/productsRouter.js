@@ -3,6 +3,7 @@ import {
     getProducts,
     getCategories,
     addProduct,
+    rateProduct,
     getMockingProducts,
     regenerateMockingProducts,
     createProduct
@@ -13,6 +14,7 @@ const router = express.Router()
 router.get('/', getProducts)
 router.get('/categories', getCategories)
 router.post('/create', addProduct)
+router.post('/:pid/rate', rateProduct)
 
 router.get('/mockingProducts', getMockingProducts)
 router.post('/mockingProducts/regenerate', regenerateMockingProducts)

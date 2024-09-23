@@ -47,11 +47,6 @@ app.use(session({
     }
 }))
 
-/* app.use((req, res, next) => {
-    logger.http(`${req.method} ${req.url}`)
-    next()
-}) */
-
 if (process.env.NODE_ENV === 'production') {
     app.use(morgan('dev'))
 }
