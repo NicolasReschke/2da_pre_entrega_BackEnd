@@ -34,11 +34,26 @@ const getPopulatedCart = async (cartId) => {
 }
 
 router.get('/', async (req, res) => {
-    res.render('home', {
-        style: 'style.css',
-        user: res.locals.user,
-        cart: res.locals.cart
-    })
+    try {
+        const bestsellingProducts = await Product.find({ sales: { $gt: 0 } })
+            .sort({ sales: -1 })
+            .limit(10)
+
+        const ratedProducts = await Product.find({ ratings: { $exists: true, $not: { $size: 0 } } })
+            .sort({ 'ratings.rating': -1 })
+            .limit(10)
+
+        res.render('home', {
+            style: 'style.css',
+            user: res.locals.user,
+            cart: res.locals.cart,
+            bestsellingProducts,
+            ratedProducts
+        })
+    } catch (error) {
+        console.error("Error al obtener productos", error)
+        res.status(500).send("Error interno del servidor")
+    }
 })
 
 router.get('/products', checkUser, async (req, res) => {
