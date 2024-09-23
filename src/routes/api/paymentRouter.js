@@ -29,12 +29,21 @@ router.post('/stripe', async (req, res) => {
             quantity: item.quantity,
         }))
 
+        const successUrl = process.env.NODE_ENV === 'production'
+            ? `http://localhost:8080/carts/${cartId}/purchase?status=success`
+            : `https://2dapreentregabackend-production.up.railway.app/carts/${cartId}/purchase?status=success`
+        
+        const cancelUrl = process.env.NODE_ENV === 'production'
+            ? `http://localhost:8080/carts/${cartId}/purchase?status=error`
+            : `https://2dapreentregabackend-production.up.railway.app/carts/${cartId}/purchase?status=error`
+
+        // Crear la sesión de Stripe
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
-            success_url: `http://localhost:8080/carts/${cartId}/purchase?status=success`,
-            cancel_url: `http://localhost:8080/carts/${cartId}/purchase?status=error`,
+            success_url: successUrl,
+            cancel_url: cancelUrl,
         })
 
         res.json({ status: 'success', url: session.url })
