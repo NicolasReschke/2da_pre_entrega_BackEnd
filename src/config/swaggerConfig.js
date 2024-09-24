@@ -1,6 +1,11 @@
 import { url } from 'inspector'
 import swaggerJsdoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
+import dotenv from 'dotenv'
+
+dotenv.config()
+
+const isProduction = process.env.NODE_ENV === 'production'
 
 const options = {
     definition: {
@@ -11,8 +16,9 @@ const options = {
         },
         servers: [
             {
-                url: 'https://2dapreentregabackend-production.up.railway.app',
-                url: 'http://localhost:8080',
+                url: isProduction 
+                    ? "https://localhost:8080"
+                    : "https://2dapreentregabackend-production.up.railway.app",
             },
         ],
     },
