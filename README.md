@@ -1,6 +1,6 @@
 <h1 align="center" id="title">Proyecto final - BackEnd</h1>
 
-El proyecto es el backend de una aplicaciónde ecommerce que permite a los usuarios gestionar productos, carritos de compras y realizar pagos mediante stripe. La aplicación también cuenta con autenticación mediante Google y GitHub, y un sistema de roles que controla el acceso a diferentes funcionalidades.
+El proyecto es el backend de una aplicación de ecommerce, que permite a los usuarios gestionar productos, carritos de compras y realizar pagos mediante stripe. La aplicación también cuenta con autenticación mediante Google y GitHub, y un sistema de roles que controla el acceso a diferentes funcionalidades.
 
 Características
 Autenticación y autorización: Soporte para autenticación mediante Google y GitHub.
