@@ -28,7 +28,7 @@ Soporte para vistas dinámicas: Uso de Handlebars para renderizar las vistas.
 - [Objetivos Específicos](#objetivosespecíficos)
 - [Usos](#usos)
 - [Vistas](#vistas)
-- [Tecnologías utilizadas](#tecnologíasUtilizadas)
+- [Tecnologías utilizadas](#tecnologíasutilizadas)
 - [Dependencias](#dependencias)
 - [Contribuciones](#contribuciones)
 
@@ -93,7 +93,7 @@ Documentar la API del ecommerce con Swagger, centrando la documentación en los 
 Realizar el despliegue final del ecommerce en Railway o una plataforma similar.
 Corroborar que el flujo de compra completo funcione correctamente en producción.
 
-## Uso
+## Usos
 
 Endpoints principales:
 
