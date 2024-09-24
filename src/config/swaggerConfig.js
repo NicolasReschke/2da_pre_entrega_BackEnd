@@ -1,3 +1,4 @@
+import { url } from 'inspector'
 import swaggerJsdoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
 
@@ -10,6 +11,7 @@ const options = {
         },
         servers: [
             {
+                url: 'https://2dapreentregabackend-production.up.railway.app',
                 url: 'http://localhost:8080',
             },
         ],
