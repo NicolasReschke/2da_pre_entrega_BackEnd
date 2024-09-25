@@ -28,7 +28,7 @@ Soporte para vistas dinámicas: Uso de Handlebars para renderizar las vistas.
 - [Objetivos Específicos](#objetivosespecificos)
 - [Usos](#usos)
 - [Vistas](#vistas)
-- [Tecnologías utilizadas](#tecnologías)
+- [Tecnologías utilizadas](#tecnologíasutilizadas)
 - [Dependencias](#dependencias)
 - [Contribuciones](#contribuciones)
 
