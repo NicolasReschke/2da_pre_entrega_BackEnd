@@ -12,6 +12,8 @@ Gestión de usuarios: Los administradores pueden ver, modificar roles y eliminar
 Sistema de valoraciones y comentarios: Los usuarios pueden valorar productos y dejar comentarios.
 Soporte para vistas dinámicas: Uso de Handlebars para renderizar las vistas.
 
+https://github.com/user-attachments/assets/76394d8d-69a0-4b6a-948d-d323e9a9a6ac
+
 ## Instalación
 
 1. Clona este repositorio: `git clone https://github.com/NicolasReschke/2da_pre_entrega_BackEnd`
@@ -28,7 +30,7 @@ Soporte para vistas dinámicas: Uso de Handlebars para renderizar las vistas.
 - [Objetivos Específicos](#objetivosespecificos)
 - [Usos](#usos)
 - [Vistas](#vistas)
-- [Tecnologías utilizadas](#tecnologíasutilizadas)
+- [Tecnologías utilizadas](#tecnologías)
 - [Dependencias](#dependencias)
 - [Contribuciones](#contribuciones)
 
@@ -128,36 +130,72 @@ Endpoints principales:
 - #### Admin
 
 - `/adminViewAllProducts` para visualizar todos los productos con opción a editar y eliminar.
+
+![image](https://github.com/user-attachments/assets/8afa0ffa-42ab-48de-b327-92f5d74b83d1)
+
 - `/adminAddProduct` para agregar un producto.
-- `/adminViewAllUsers` para visualizar todos los usuarios, gestionar roles, eliminar inactivos y eliminar de manera individual
+- `/adminViewAllUsers` para visualizar todos los usuarios, gestionar roles, eliminar inactivos y eliminar de manera individual.
+
+![image](https://github.com/user-attachments/assets/1b5df7e8-13ed-4c9a-9c95-f39c39d540d8)
 
 - #### Usuarios
 
 - `/profile` para ver y editar los datos del usuario, cambiar la contraseña, eliminar cuenta, subir documentos, etc.
+
+![image](https://github.com/user-attachments/assets/7bdf9d6f-c425-43a9-8cca-f4f3289fce72)
+
 - `/purchases` para ver las compras del usuario
+
+![image](https://github.com/user-attachments/assets/575be6ca-3487-48b1-9a1d-fbd7f4644eb2)
+
 - `/chat` publicar comentarios, editarlos o eliminarlos y comentar los mismos.
+
+![image](https://github.com/user-attachments/assets/35b88848-07ef-4dd6-8844-8a4bed411b89)
+
 - `/login` para loguear el usuario.
 - `/register` para registrar el usuario.
 
 - #### Productos
 
 - `/products` para visualizar todos los productos con paginación.
+
+![image](https://github.com/user-attachments/assets/5d21f2ec-fe62-42df-8f11-5dfa49a800f3)
+
 - `/products/:pid` para visualizar un producto específico con sus detalles.
+
+![image](https://github.com/user-attachments/assets/badc467a-1964-431d-ad62-52cb806eb87b)
+
 - `/products/category/:category` visualizar los productos según su categoría.
 
 - #### Carrito
 
 - `/carts/:cid` para visualizar un carrito específico con sus productos.
+
+![image](https://github.com/user-attachments/assets/a5759ed2-b594-440a-a6f7-a014bc5002a2)
+
 - `/carts/:cid/purchase` para visualizar el resumen del carrito y acceder a la pasarela de pago.
+
+![image](https://github.com/user-attachments/assets/b518d16a-af94-4486-83d6-3c16944048f4)
 
 - #### Otros
 
 - `/` home de la aplicación con carruseles "más vendidos" y "mejor puntuados".
+
+![image](https://github.com/user-attachments/assets/fd322c8a-55e3-47cc-9543-c6fc0de9c706)
+
 - `/mockingProducts` para visualizar y generar 100 productos "mock".
+
+![image](https://github.com/user-attachments/assets/496011d0-d4c0-4367-8611-e5bf51be8bcc)
+
 - `/loggertestview` para probar los diferentes Test (Debug, Http, Info, Warning, Error y Fatal).
+
+![image](https://github.com/user-attachments/assets/9c1c9b20-3440-4005-aff3-970f6a929d3c)
+
 - `/api-docs/` para testear los endPoints con Swagger.
 
-## Tecnologías utilizadas
+![image](https://github.com/user-attachments/assets/8857667f-a1ef-48b7-bea5-85ee0ab8d50b)
+
+## Tecnologías
 
 - Node.js: Entorno de ejecución para el backend.
 - Express.js: Framework para crear el servidor.
