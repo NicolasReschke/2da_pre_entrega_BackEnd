@@ -8,6 +8,7 @@ import Message from '../../models/messageModel.js'
 import MockingProduct from '../../models/mockingProductsModel.js'
 import jwt from 'jsonwebtoken'
 import transporter from '../../config/emailConfigs.js'
+import Ticket from '../../models/ticketModel.js'
 
 dotenv.config()
 const router = express.Router()
@@ -423,6 +424,36 @@ router.get('/adminViewAllUsers', authorizeRoles(['admin']), async (req, res) => 
     } catch (error) {
         console.error('Error al obtener los usuarios:', error)
         res.status(500).send('Error al obtener los usuarios')
+    }
+})
+
+router.get('/adminViewAllPurchases', authorizeRoles(['admin']), async (req, res) => {
+    try {
+        const purchases = await Ticket.find().populate('products.product').lean()
+        res.render('adminViewAllPurchases', {
+            style: 'style.css',
+            user: res.locals.user,
+            purchases: purchases
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(500).send('Error al obtener las compras.')
+    }
+})
+
+router.delete('/admin/deletePurchase/:id', async (req, res) => {
+    try {
+        const { id } = req.params
+        const deletedPurchase = await Ticket.findByIdAndDelete(id)
+
+        if (!deletedPurchase) {
+            return res.status(404).json({ success: false, message: 'Compra no encontrada' })
+        }
+
+        res.json({ success: true, message: 'Compra eliminada correctamente' })
+    } catch (error) {
+        console.error('Error al eliminar la compra:', error)
+        res.status(500).json({ success: false, message: 'Error en el servidor' })
     }
 })
 

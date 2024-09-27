@@ -50,8 +50,15 @@
             </thead>
             <tbody>
                 {{#each products}}
-                    <tr>
-                        <td><img src="{{this.thumbnail}}" alt="{{this.title}} thumbnail" class="img-fluid" style="width: 100px;"></td>
+                    <tr class="product-row">
+                        <td>
+                            <div class="product-container">
+                                <img src="{{this.thumbnail}}" alt="{{this.title}} thumbnail" class="img-fluid product-image" style="width: 100px;">
+                                <div class="overlay">
+                                    <a href="/products/{{this._id}}" class="btn btn-primary view-details-btn">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </td>
                         <td>{{this._id}}</td>
                         <td>{{this.name}}</td>
                         <td>${{this.price}}</td>
@@ -99,3 +106,52 @@
         })
     })
 </script>
+
+<style>
+    .product-row {
+        position: relative;
+    }
+
+    .product-container {
+        position: relative;
+        width: 100px;
+        height: auto;
+    }
+
+    .product-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .product-row:hover .overlay {
+        opacity: 1;
+    }
+
+    .view-details-btn {
+        display: none;
+        font-size: 10px;
+    }
+
+    .product-row:hover .view-details-btn {
+        display: block;
+    }
+
+    .product-row:hover td {
+        background-color: rgba(0, 0, 0, 0.1);
+        cursor:default;
+    }
+</style>
