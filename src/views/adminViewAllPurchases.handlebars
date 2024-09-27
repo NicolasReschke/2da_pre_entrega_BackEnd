@@ -41,11 +41,11 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const deleteButtons = document.querySelectorAll('.delete-purchase-btn');
+        const deleteButtons = document.querySelectorAll('.delete-purchase-btn')
         
         deleteButtons.forEach(button => {
             button.addEventListener('click', function () {
-                const purchaseId = this.getAttribute('data-id');
+                const purchaseId = this.getAttribute('data-id')
                 
                 Swal.fire({
                     title: '¿Estás seguro?',
@@ -63,10 +63,10 @@
                         .then(response => response.json())
                         .then(data => {
                             if (data.success) {
-                                Swal.fire('Eliminado', 'La compra ha sido eliminada.', 'success');
-                                window.location.reload();
+                                Swal.fire('Eliminado', 'La compra ha sido eliminada.', 'success')
+                                window.location.reload()
                             } else {
-                                Swal.fire('Error', 'Hubo un problema al eliminar la compra.', 'error');
+                                Swal.fire('Error', 'Hubo un problema al eliminar la compra.', 'error')
                             }
                         })
                     }
