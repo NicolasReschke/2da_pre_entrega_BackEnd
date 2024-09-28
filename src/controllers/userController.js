@@ -83,6 +83,7 @@ export const updateDocumentsProfile = async (req, res) => {
         const hasAllDocuments = requiredDocuments.every(doc => userDocuments.includes(doc))
         if (hasAllDocuments) {
             user.role = 'premium'
+            await sendEmail(user.email, 'Promoción a usuario premium', '¡Felicidades! Has sido promovido a usuario premium. Ahora puedes comenzar a publicar tus propios productos.')
         }
 
         await user.save()

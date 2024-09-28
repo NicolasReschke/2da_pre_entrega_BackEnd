@@ -1,5 +1,7 @@
 <h1>Cargar Documentos</h1>
-<h4>(Solo se permiten archivos JPEG, JPG, PNG o PDF!)</h4><br>
+<h4>(Solo se permiten archivos JPEG, JPG, PNG o PDF!)</h4>
+<h4>Los archivos no deben pesar más de 5mb!!!</h4>
+<br>
     {{#if success}}
         <div class="alert alert-success">{{success}}</div>
     {{/if}}
@@ -36,6 +38,15 @@
         previewContainer.innerHTML = ''
 
         if (file) {
+            const maxSizeInMB = 5
+            const maxSizeInBytes = maxSizeInMB * 1024 * 1024
+
+            if (file.size > maxSizeInBytes) {
+                alert(`El archivo ${file.name} excede el tamaño máximo permitido de 5MB.`)
+                input.value = ''
+                return
+            }
+
             const fileType = file.type
             if (fileType.startsWith('image/')) {
                 const imgPreview = document.createElement('img')
