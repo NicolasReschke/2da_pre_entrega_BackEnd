@@ -32,9 +32,11 @@
                         </select>
                     </form>
                 </td>
-                <td>
-                    <button class="btn btn-danger delete-user-btn" data-id="{{this._id}}" data-name="{{this.first_name}}">Eliminar</button>
-                </td>
+                {{#if (different this.role 'admin')}}
+                    <td>
+                        <button class="btn btn-danger delete-user-btn" data-id="{{this._id}}" data-name="{{this.first_name}}">Eliminar</button>
+                    </td>
+                {{/if}}
             </tr>
             {{/each}}
         </tbody>
